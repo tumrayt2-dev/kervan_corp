@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../l10n/app_localizations.dart';
 import '../core/constants.dart';
 import '../core/extensions.dart';
@@ -71,6 +72,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           ],
         ),
       ),
+      floatingActionButton: _GameMenuButton(onSave: _autoSave),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (i) => setState(() => _selectedIndex = i),
@@ -142,6 +144,76 @@ class _StatChip extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _GameMenuButton extends StatelessWidget {
+  final Future<void> Function() onSave;
+  const _GameMenuButton({required this.onSave});
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return FloatingActionButton(
+      backgroundColor: AppColors.surface,
+      foregroundColor: AppColors.textSecondary,
+      mini: true,
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: AppColors.surface,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+          ),
+          builder: (ctx) => SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.save_outlined, color: AppColors.primary),
+                    title: Text(l.save),
+                    onTap: () async {
+                      Navigator.pop(ctx);
+                      await onSave();
+                      if (ctx.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Kaydedildi'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.settings_outlined,
+                        color: AppColors.textSecondary),
+                    title: Text(l.settings),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      context.push('/settings');
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.home_outlined,
+                        color: AppColors.textSecondary),
+                    title: const Text('Ana Menü'),
+                    onTap: () async {
+                      Navigator.pop(ctx);
+                      await onSave();
+                      if (context.mounted) context.go('/');
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+      child: const Icon(Icons.menu),
     );
   }
 }
