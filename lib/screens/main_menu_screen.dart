@@ -7,61 +7,73 @@ import '../services/save_service.dart';
 import '../providers/game_provider.dart';
 import '../providers/inventory_provider.dart';
 
-class MainMenuScreen extends ConsumerWidget {
+class MainMenuScreen extends ConsumerStatefulWidget {
   const MainMenuScreen({super.key});
 
-  Future<void> _continueGame(BuildContext context, WidgetRef ref) async {
+  @override
+  ConsumerState<MainMenuScreen> createState() => _MainMenuScreenState();
+}
+
+class _MainMenuScreenState extends ConsumerState<MainMenuScreen> {
+  bool _hasSave = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _hasSave = SaveService.hasSave;
+  }
+
+  Future<void> _continueGame() async {
     final loaded = SaveService.loadGame();
     if (loaded != null) {
       ref.read(gameProvider.notifier).loadState(loaded.$1);
       ref.read(inventoryProvider.notifier).loadInventory(loaded.$2);
     }
-    if (context.mounted) context.go('/game');
+    if (mounted) context.go('/game');
   }
 
-  Future<void> _startNewGame(BuildContext context, WidgetRef ref) async {
+  Future<void> _startNewGame() async {
+    final l = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
-      builder: (ctx) {
-        final l = AppLocalizations.of(ctx);
-        return AlertDialog(
-          title: Text(l.newGameConfirmTitle),
-          content: Text(l.newGameConfirmBody),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(ctx, false),
-              child: Text(l.cancel),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(ctx, true),
-              child: Text(l.confirm),
-            ),
-          ],
-        );
-      },
+      builder: (ctx) => AlertDialog(
+        title: Text(l.newGameConfirmTitle),
+        content: Text(l.newGameConfirmBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l.cancel),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l.confirm),
+          ),
+        ],
+      ),
     );
     if (confirmed == true) {
       await SaveService.deleteSave();
       final newState = SaveService.createNewGame();
       final newInventory = SaveService.createNewInventory();
+      await SaveService.saveAll(newState, newInventory);
       ref.read(gameProvider.notifier).loadState(newState);
       ref.read(inventoryProvider.notifier).loadInventory(newInventory);
-      if (context.mounted) context.go('/game');
+      if (mounted) context.go('/game');
     }
   }
 
-  Future<void> _playNew(BuildContext context, WidgetRef ref) async {
+  Future<void> _playNew() async {
     final newState = SaveService.createNewGame();
     final newInventory = SaveService.createNewInventory();
+    await SaveService.saveAll(newState, newInventory);
     ref.read(gameProvider.notifier).loadState(newState);
     ref.read(inventoryProvider.notifier).loadInventory(newInventory);
-    if (context.mounted) context.go('/game');
+    if (mounted) context.go('/game');
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
-    final hasSave = SaveService.hasSave;
 
     return Scaffold(
       body: SafeArea(
@@ -90,9 +102,9 @@ class MainMenuScreen extends ConsumerWidget {
                 textAlign: TextAlign.center,
               ),
               const Spacer(flex: 2),
-              if (hasSave) ...[
+              if (_hasSave) ...[
                 ElevatedButton(
-                  onPressed: () => _continueGame(context, ref),
+                  onPressed: _continueGame,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -100,7 +112,7 @@ class MainMenuScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton(
-                  onPressed: () => _startNewGame(context, ref),
+                  onPressed: _startNewGame,
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     side: const BorderSide(color: AppColors.border),
@@ -110,7 +122,7 @@ class MainMenuScreen extends ConsumerWidget {
                 ),
               ] else ...[
                 ElevatedButton(
-                  onPressed: () => _playNew(context, ref),
+                  onPressed: _playNew,
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
