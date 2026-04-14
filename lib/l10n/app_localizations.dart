@@ -305,7 +305,7 @@ abstract class AppLocalizations {
   /// No description provided for @sectorAgriculture.
   ///
   /// In tr, this message translates to:
-  /// **'Tarım'**
+  /// **'Hammadde'**
   String get sectorAgriculture;
 
   /// No description provided for @sectorProduction.
@@ -479,8 +479,8 @@ abstract class AppLocalizations {
   /// No description provided for @sellAll.
   ///
   /// In tr, this message translates to:
-  /// **'Tümünü Sat'**
-  String get sellAll;
+  /// **'Tümünü Sat ({qty})'**
+  String sellAll(String qty);
 
   /// No description provided for @estimatedRevenue.
   ///
@@ -517,6 +517,132 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'Depo dolu — önce sat'**
   String get storageFull;
+
+  /// No description provided for @filterAll.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tümü'**
+  String get filterAll;
+
+  /// No description provided for @filterRawAgri.
+  ///
+  /// In tr, this message translates to:
+  /// **'🌾 Tarım'**
+  String get filterRawAgri;
+
+  /// No description provided for @filterRawAnimal.
+  ///
+  /// In tr, this message translates to:
+  /// **'🐄 Hayvan'**
+  String get filterRawAnimal;
+
+  /// No description provided for @filterRawMining.
+  ///
+  /// In tr, this message translates to:
+  /// **'⛏️ Maden'**
+  String get filterRawMining;
+
+  /// No description provided for @filterRawForest.
+  ///
+  /// In tr, this message translates to:
+  /// **'🌲 Orman'**
+  String get filterRawForest;
+
+  /// No description provided for @filterProcessed.
+  ///
+  /// In tr, this message translates to:
+  /// **'⚙️ İşlenmiş'**
+  String get filterProcessed;
+
+  /// No description provided for @filterManufactured.
+  ///
+  /// In tr, this message translates to:
+  /// **'📦 Ürünler'**
+  String get filterManufactured;
+
+  /// No description provided for @inventoryTotalValue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Toplam'**
+  String get inventoryTotalValue;
+
+  /// No description provided for @inventoryCapacity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Kapasite'**
+  String get inventoryCapacity;
+
+  /// No description provided for @reservedNote.
+  ///
+  /// In tr, this message translates to:
+  /// **'{qty} sözleşme rezervi'**
+  String reservedNote(String qty);
+
+  /// No description provided for @channelLocked.
+  ///
+  /// In tr, this message translates to:
+  /// **'🔒 Bina gerekli'**
+  String get channelLocked;
+
+  /// No description provided for @unitPrice.
+  ///
+  /// In tr, this message translates to:
+  /// **'Birim'**
+  String get unitPrice;
+
+  /// No description provided for @perMinute.
+  ///
+  /// In tr, this message translates to:
+  /// **'/dk'**
+  String get perMinute;
+
+  /// No description provided for @hideZeroStock.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıfırları Gizle'**
+  String get hideZeroStock;
+
+  /// No description provided for @showZeroStock.
+  ///
+  /// In tr, this message translates to:
+  /// **'Sıfırları Göster'**
+  String get showZeroStock;
+
+  /// No description provided for @sortByQuantity.
+  ///
+  /// In tr, this message translates to:
+  /// **'Miktar'**
+  String get sortByQuantity;
+
+  /// No description provided for @sortByValue.
+  ///
+  /// In tr, this message translates to:
+  /// **'Değer'**
+  String get sortByValue;
+
+  /// No description provided for @sortByName.
+  ///
+  /// In tr, this message translates to:
+  /// **'İsim'**
+  String get sortByName;
+
+  /// No description provided for @warehouseLv.
+  ///
+  /// In tr, this message translates to:
+  /// **'Depo Sv.{level}'**
+  String warehouseLv(int level);
+
+  /// No description provided for @warehouseMaxLv.
+  ///
+  /// In tr, this message translates to:
+  /// **'Maks Seviye'**
+  String get warehouseMaxLv;
+
+  /// No description provided for @upgradeWarehouseBtn.
+  ///
+  /// In tr, this message translates to:
+  /// **'Yükselt'**
+  String get upgradeWarehouseBtn;
 
   /// No description provided for @waitingForInput.
   ///
@@ -1267,12 +1393,6 @@ abstract class AppLocalizations {
   /// In tr, this message translates to:
   /// **'{sector} Sektörü Açıldı!'**
   String sectorUnlocked(String sector);
-
-  /// No description provided for @perMinute.
-  ///
-  /// In tr, this message translates to:
-  /// **'/dk'**
-  String get perMinute;
 
   /// No description provided for @units.
   ///

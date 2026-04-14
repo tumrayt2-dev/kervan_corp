@@ -29,6 +29,7 @@ class RecipeOutput {
 class ProductionRecipe {
   final String buildingType;
   final String recipeId;
+  final double recipeCost;
   final double processingTimeSec;
   final List<RecipeInput> inputs;
   final List<RecipeOutput> outputs;
@@ -36,6 +37,7 @@ class ProductionRecipe {
   const ProductionRecipe({
     required this.buildingType,
     required this.recipeId,
+    this.recipeCost = 0,
     required this.processingTimeSec,
     required this.inputs,
     required this.outputs,
@@ -44,6 +46,7 @@ class ProductionRecipe {
   factory ProductionRecipe.fromJson(Map<String, dynamic> json) => ProductionRecipe(
     buildingType: json['buildingType'] as String,
     recipeId: json['recipeId'] as String,
+    recipeCost: (json['recipeCost'] as num? ?? 0).toDouble(),
     processingTimeSec: (json['processingTimeSec'] as num).toDouble(),
     inputs: (json['inputs'] as List)
         .map((e) => RecipeInput.fromJson(e as Map<String, dynamic>))
@@ -59,6 +62,7 @@ class BuildingData {
   final String type;
   final String nameKey;
   final double baseCost;
+  final double purchaseMultiplier;
   final double costMultiplier;
   final double baseProductionTimeSec;
   final double baseLocalStock;
@@ -67,13 +71,13 @@ class BuildingData {
   final String sector;
   final int layer;
   final double energyConsumption;
-  final bool isUnlockedByDefault;
 
   const BuildingData({
     required this.id,
     required this.type,
     required this.nameKey,
     required this.baseCost,
+    this.purchaseMultiplier = 1.5,
     required this.costMultiplier,
     required this.baseProductionTimeSec,
     required this.baseLocalStock,
@@ -82,14 +86,24 @@ class BuildingData {
     required this.sector,
     required this.layer,
     required this.energyConsumption,
-    required this.isUnlockedByDefault,
   });
+
+  /// N adet sahip iken bir tane daha almanın maliyeti
+  double purchaseCost(int owned) =>
+      baseCost * _pow(purchaseMultiplier, owned);
+
+  static double _pow(double base, int exp) {
+    double result = 1;
+    for (var i = 0; i < exp; i++) result *= base;
+    return result;
+  }
 
   factory BuildingData.fromJson(Map<String, dynamic> json) => BuildingData(
     id: json['id'] as String,
     type: json['type'] as String,
     nameKey: json['nameKey'] as String,
     baseCost: (json['baseCost'] as num).toDouble(),
+    purchaseMultiplier: (json['purchaseMultiplier'] as num? ?? 1.5).toDouble(),
     costMultiplier: (json['costMultiplier'] as num).toDouble(),
     baseProductionTimeSec: (json['baseProductionTimeSec'] as num).toDouble(),
     baseLocalStock: (json['baseLocalStock'] as num).toDouble(),
@@ -98,7 +112,6 @@ class BuildingData {
     sector: json['sector'] as String,
     layer: json['layer'] as int,
     energyConsumption: (json['energyConsumption'] as num).toDouble(),
-    isUnlockedByDefault: json['isUnlockedByDefault'] as bool? ?? false,
   );
 }
 

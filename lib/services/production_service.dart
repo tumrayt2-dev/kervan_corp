@@ -7,6 +7,10 @@ class BuildingTimer {
   double elapsed = 0;
   double processingTime;
   String? activeRecipeId;
+  /// Manuel mod: Üret'e basılınca true olur, tur bitince false döner
+  bool isManuallyRunning = false;
+  /// Her tur tamamlanınca artar
+  int completedCycles = 0;
 
   BuildingTimer({required this.processingTime, this.activeRecipeId});
 }
@@ -63,7 +67,29 @@ class ProductionService {
       if (!building.isUnlocked) continue;
 
       if (!building.hasManager) {
-        if (building.status != BuildingStatus.idle) {
+        final t = timers[building.id];
+        if (t != null && t.isManuallyRunning) {
+          // İşlem süresi değişmişse güncelle (level up vb.)
+          final currentTime = calcProcessingTime(building);
+          if ((currentTime - t.processingTime).abs() > 0.01) {
+            t.processingTime = currentTime;
+          }
+          t.elapsed += deltaTime;
+
+          if (building.status != BuildingStatus.producing) {
+            changes[building.id] = BuildingStatus.producing;
+          }
+
+          if (t.elapsed >= t.processingTime) {
+            // Tur tamamlandı
+            final result = tryProduce(building, t, invService);
+            t.isManuallyRunning = false;
+            t.elapsed = 0;
+            // Başarılı üretimde idle'a dön, hata varsa hata durumunu göster
+            changes[building.id] =
+                result == BuildingStatus.producing ? BuildingStatus.idle : result;
+          }
+        } else if (building.status != BuildingStatus.idle) {
           changes[building.id] = BuildingStatus.idle;
         }
         continue;
@@ -100,9 +126,32 @@ class ProductionService {
       BuildingModel building, InventoryService invService) {
     ensureTimer(building);
     final timer = timers[building.id]!;
-    final result = tryProduce(building, timer, invService);
-    if (result == BuildingStatus.producing) timer.elapsed = 0;
-    return result;
+
+    // Zaten çalışıyorsa tekrar başlatma
+    if (timer.isManuallyRunning) return BuildingStatus.producing;
+
+    final recipe = getFirstRecipe(building);
+    if (recipe == null) return BuildingStatus.idle;
+
+    // Girdi kontrolü
+    for (final inp in recipe.inputs) {
+      if (invService.getAvailableQty(inp.productType) < inp.quantity) {
+        return BuildingStatus.waitingInput;
+      }
+    }
+
+    // Depo kontrolü (peek — gerçek üretim tur sonunda olur)
+    for (final out in recipe.outputs) {
+      final slot = invService.inventory.slots[out.productType];
+      if (slot != null && slot.quantity + out.quantity > slot.maxCapacity) {
+        return BuildingStatus.storageFull;
+      }
+    }
+
+    // Turu başlat
+    timer.isManuallyRunning = true;
+    timer.elapsed = 0;
+    return BuildingStatus.producing;
   }
 
   // --- Offline hesaplama ---
@@ -193,6 +242,7 @@ class ProductionService {
       }
     }
 
+    timer.completedCycles++;
     return BuildingStatus.producing;
   }
 

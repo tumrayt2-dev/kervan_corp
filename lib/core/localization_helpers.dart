@@ -72,6 +72,45 @@ String productName(AppLocalizations l, ProductType type) {
   };
 }
 
+/// Ürün emojisi
+String productEmoji(ProductType type) => switch (type) {
+  ProductType.wheat          => '🌾',
+  ProductType.sugarCane      => '🎋',
+  ProductType.cotton         => '🌿',
+  ProductType.corn           => '🌽',
+  ProductType.milk           => '🥛',
+  ProductType.wool           => '🧶',
+  ProductType.meat           => '🥩',
+  ProductType.egg            => '🥚',
+  ProductType.ironOre        => '🪨',
+  ProductType.copperOre      => '🟠',
+  ProductType.sand           => '⏳',
+  ProductType.coal           => '⬛',
+  ProductType.stone          => '🪵',
+  ProductType.timber         => '🌲',
+  ProductType.flour          => '🫙',
+  ProductType.cornFlour      => '🌽',
+  ProductType.sugar          => '🍬',
+  ProductType.cheese         => '🧀',
+  ProductType.yogurt         => '🥣',
+  ProductType.fabric         => '🧵',
+  ProductType.rawIron        => '🔩',
+  ProductType.copper         => '🟤',
+  ProductType.steel          => '⚙️',
+  ProductType.glass          => '🪟',
+  ProductType.processedWood  => '🪵',
+  ProductType.bread          => '🍞',
+  ProductType.cake           => '🎂',
+  ProductType.machine        => '🤖',
+  ProductType.electronic     => '💻',
+  ProductType.furniture      => '🪑',
+  ProductType.premiumFurniture => '🛋️',
+  ProductType.clothing       => '👗',
+  ProductType.smartClothing  => '🧥',
+  ProductType.burger         => '🍔',
+  ProductType.pizza          => '🍕',
+};
+
 /// Üretim hızını uygun birimde göster
 /// 60/saat'ten fazlaysa dk, değilse saat bazında
 String formatRate(double perHour, AppLocalizations l) {

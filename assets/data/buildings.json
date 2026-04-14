@@ -1,214 +1,184 @@
 [
   {
     "id": "farm", "type": "farm", "nameKey": "building_farm",
-    "baseCost": 500, "costMultiplier": 1.15,
+    "baseCost": 5000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 5, "baseLocalStock": 200,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "agriculture", "layer": 1, "energyConsumption": 0,
-    "isUnlockedByDefault": true,
-    "outputs": ["wheat", "cotton"]
+    "sector": "agriculture", "layer": 1, "energyConsumption": 0
   },
   {
     "id": "mine", "type": "mine", "nameKey": "building_mine",
-    "baseCost": 1200, "costMultiplier": 1.15,
+    "baseCost": 8000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 8, "baseLocalStock": 150,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "agriculture", "layer": 1, "energyConsumption": 10,
-    "isUnlockedByDefault": true,
-    "outputs": ["ironOre", "copperOre"]
+    "sector": "agriculture", "layer": 1, "energyConsumption": 10
   },
   {
     "id": "forest", "type": "forest", "nameKey": "building_forest",
-    "baseCost": 800, "costMultiplier": 1.15,
+    "baseCost": 6000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 10, "baseLocalStock": 150,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "agriculture", "layer": 1, "energyConsumption": 0,
-    "isUnlockedByDefault": false,
-    "outputs": ["timber"]
+    "sector": "agriculture", "layer": 1, "energyConsumption": 0
   },
   {
     "id": "ranch", "type": "ranch", "nameKey": "building_ranch",
-    "baseCost": 1500, "costMultiplier": 1.15,
+    "baseCost": 10000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 12, "baseLocalStock": 150,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "agriculture", "layer": 1, "energyConsumption": 0,
-    "isUnlockedByDefault": false,
-    "outputs": ["milk", "wool", "meat"]
+    "sector": "agriculture", "layer": 1, "energyConsumption": 0
   },
   {
     "id": "quarry", "type": "quarry", "nameKey": "building_quarry",
-    "baseCost": 900, "costMultiplier": 1.15,
+    "baseCost": 7000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 6, "baseLocalStock": 200,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "agriculture", "layer": 1, "energyConsumption": 5,
-    "isUnlockedByDefault": false,
-    "outputs": ["stone", "sand"]
+    "sector": "agriculture", "layer": 1, "energyConsumption": 5
   },
   {
     "id": "mill", "type": "mill", "nameKey": "building_mill",
-    "baseCost": 3000, "costMultiplier": 1.15,
+    "baseCost": 20000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 20, "baseLocalStock": 100,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 2, "energyConsumption": 5,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 2, "energyConsumption": 5
   },
   {
     "id": "ironFactory", "type": "ironFactory", "nameKey": "building_ironFactory",
-    "baseCost": 5000, "costMultiplier": 1.15,
+    "baseCost": 35000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 25, "baseLocalStock": 80,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 2, "energyConsumption": 15,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 2, "energyConsumption": 15
   },
   {
     "id": "woodProcessing", "type": "woodProcessing", "nameKey": "building_woodProcessing",
-    "baseCost": 4000, "costMultiplier": 1.15,
+    "baseCost": 25000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 22, "baseLocalStock": 80,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 2, "energyConsumption": 8,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 2, "energyConsumption": 8
   },
   {
     "id": "dairyFactory", "type": "dairyFactory", "nameKey": "building_dairyFactory",
-    "baseCost": 6000, "costMultiplier": 1.15,
+    "baseCost": 40000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 80,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 2, "energyConsumption": 10,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 2, "energyConsumption": 10
   },
   {
     "id": "textileFactory", "type": "textileFactory", "nameKey": "building_textileFactory",
-    "baseCost": 7000, "costMultiplier": 1.15,
+    "baseCost": 45000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 28, "baseLocalStock": 80,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 2, "energyConsumption": 12,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 2, "energyConsumption": 12
   },
   {
     "id": "bakery", "type": "bakery", "nameKey": "building_bakery",
-    "baseCost": 10000, "costMultiplier": 1.15,
+    "baseCost": 60000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 15, "baseLocalStock": 60,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 3, "energyConsumption": 10,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 3, "energyConsumption": 10
   },
   {
     "id": "steelFactory", "type": "steelFactory", "nameKey": "building_steelFactory",
-    "baseCost": 20000, "costMultiplier": 1.15,
+    "baseCost": 120000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 50,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 3, "energyConsumption": 20,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 3, "energyConsumption": 20
   },
   {
     "id": "furnitureFactory", "type": "furnitureFactory", "nameKey": "building_furnitureFactory",
-    "baseCost": 25000, "costMultiplier": 1.15,
+    "baseCost": 150000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 45, "baseLocalStock": 40,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 3, "energyConsumption": 15,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 3, "energyConsumption": 15
   },
   {
     "id": "clothingFactory", "type": "clothingFactory", "nameKey": "building_clothingFactory",
-    "baseCost": 18000, "costMultiplier": 1.15,
+    "baseCost": 100000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 50,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 3, "energyConsumption": 12,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 3, "energyConsumption": 12
   },
   {
     "id": "readyFoodFactory", "type": "readyFoodFactory", "nameKey": "building_readyFoodFactory",
-    "baseCost": 15000, "costMultiplier": 1.15,
+    "baseCost": 80000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 20, "baseLocalStock": 60,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 3, "energyConsumption": 12,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 3, "energyConsumption": 12
   },
   {
     "id": "machineFactory", "type": "machineFactory", "nameKey": "building_machineFactory",
-    "baseCost": 50000, "costMultiplier": 1.15,
+    "baseCost": 300000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 60, "baseLocalStock": 30,
     "localStockMultiplier": 0.1, "levelBonus": 0.08,
-    "sector": "production", "layer": 3, "energyConsumption": 25,
-    "isUnlockedByDefault": false
+    "sector": "production", "layer": 3, "energyConsumption": 25
   },
   {
     "id": "market", "type": "market", "nameKey": "building_market",
-    "baseCost": 8000, "costMultiplier": 1.15,
+    "baseCost": 50000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 200,
     "localStockMultiplier": 0.2, "levelBonus": 0.08,
     "sector": "trade", "layer": 4, "energyConsumption": 5,
-    "isUnlockedByDefault": false,
     "saleMultiplier": 1.0, "dailyCapacity": 10000
   },
   {
     "id": "supermarket", "type": "supermarket", "nameKey": "building_supermarket",
-    "baseCost": 40000, "costMultiplier": 1.15,
+    "baseCost": 200000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 500,
     "localStockMultiplier": 0.2, "levelBonus": 0.08,
     "sector": "trade", "layer": 4, "energyConsumption": 15,
-    "isUnlockedByDefault": false,
     "saleMultiplier": 1.3, "dailyCapacity": 25000
   },
   {
     "id": "furnitureStore", "type": "furnitureStore", "nameKey": "building_furnitureStore",
-    "baseCost": 30000, "costMultiplier": 1.15,
+    "baseCost": 180000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 100,
     "localStockMultiplier": 0.2, "levelBonus": 0.08,
     "sector": "trade", "layer": 4, "energyConsumption": 8,
-    "isUnlockedByDefault": false,
     "saleMultiplier": 1.5, "dailyCapacity": 5000
   },
   {
     "id": "clothingStore", "type": "clothingStore", "nameKey": "building_clothingStore",
-    "baseCost": 25000, "costMultiplier": 1.15,
+    "baseCost": 150000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 150,
     "localStockMultiplier": 0.2, "levelBonus": 0.08,
     "sector": "trade", "layer": 4, "energyConsumption": 8,
-    "isUnlockedByDefault": false,
     "saleMultiplier": 1.4, "dailyCapacity": 8000
   },
   {
     "id": "industrialStore", "type": "industrialStore", "nameKey": "building_industrialStore",
-    "baseCost": 60000, "costMultiplier": 1.15,
+    "baseCost": 350000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 30, "baseLocalStock": 80,
     "localStockMultiplier": 0.2, "levelBonus": 0.08,
     "sector": "trade", "layer": 4, "energyConsumption": 10,
-    "isUnlockedByDefault": false,
     "saleMultiplier": 2.0, "dailyCapacity": 2000
   },
   {
     "id": "warehouse", "type": "warehouse", "nameKey": "building_warehouse",
-    "baseCost": 15000, "costMultiplier": 1.15,
-    "baseProductionTimeSec": 0, "baseLocalStock": 5000,
-    "localStockMultiplier": 0.3, "levelBonus": 0.08,
-    "sector": "logistics", "layer": 5, "energyConsumption": 5,
-    "isUnlockedByDefault": false
+    "baseCost": 80000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
+    "baseProductionTimeSec": 0, "baseLocalStock": 0,
+    "localStockMultiplier": 0, "levelBonus": 0.08,
+    "sector": "logistics", "layer": 5, "energyConsumption": 5
   },
   {
     "id": "truckGarage", "type": "truckGarage", "nameKey": "building_truckGarage",
-    "baseCost": 20000, "costMultiplier": 1.15,
+    "baseCost": 100000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 0, "baseLocalStock": 0,
     "localStockMultiplier": 0, "levelBonus": 0.08,
-    "sector": "logistics", "layer": 5, "energyConsumption": 0,
-    "isUnlockedByDefault": false
+    "sector": "logistics", "layer": 5, "energyConsumption": 0
   },
   {
     "id": "port", "type": "port", "nameKey": "building_port",
-    "baseCost": 100000, "costMultiplier": 1.15,
+    "baseCost": 500000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 60, "baseLocalStock": 1000,
     "localStockMultiplier": 0.2, "levelBonus": 0.08,
     "sector": "trade", "layer": 5, "energyConsumption": 20,
-    "isUnlockedByDefault": false,
     "exportMultiplier": 2.5
   },
   {
     "id": "airCargoTerminal", "type": "airCargoTerminal", "nameKey": "building_airCargoTerminal",
-    "baseCost": 500000, "costMultiplier": 1.15,
+    "baseCost": 2000000, "purchaseMultiplier": 1.5, "costMultiplier": 1.15,
     "baseProductionTimeSec": 20, "baseLocalStock": 500,
     "localStockMultiplier": 0.2, "levelBonus": 0.08,
     "sector": "trade", "layer": 5, "energyConsumption": 30,
-    "isUnlockedByDefault": false,
     "exportMultiplier": 4.0
   }
 ]

@@ -15,6 +15,20 @@ class GameState {
   List<SectorType> activeSectors;
   DateTime? offlineStartTime;
   int prestigeCount;
+  int warehouseLevel;
+
+  /// Depo kapasitesi — her seviye için sabit tablo
+  static const List<int> warehouseCapacities = [
+    5000, 7500, 11000, 16500, 25000, 37000, 55000, 82000, 125000, 185000, 280000
+  ];
+  static const List<double> warehouseUpgradeCosts = [
+    0, 1500, 3500, 8000, 18000, 42000, 95000, 215000, 480000, 1100000, 2500000
+  ];
+
+  int get maxInventoryCapacity => warehouseCapacities[warehouseLevel.clamp(0, 10)];
+  double? get nextWarehouseUpgradeCost => warehouseLevel < 10
+      ? warehouseUpgradeCosts[warehouseLevel + 1]
+      : null;
 
   GameState({
     this.money = 10000,
@@ -28,6 +42,7 @@ class GameState {
     List<SectorType>? activeSectors,
     this.offlineStartTime,
     this.prestigeCount = 0,
+    this.warehouseLevel = 0,
   })  : buildings = buildings ?? {},
         vehicles = vehicles ?? [],
         activeContracts = activeContracts ?? [],
@@ -46,6 +61,7 @@ class GameState {
     List<SectorType>? activeSectors,
     DateTime? offlineStartTime,
     int? prestigeCount,
+    int? warehouseLevel,
   }) {
     return GameState(
       money: money ?? this.money,
@@ -59,6 +75,7 @@ class GameState {
       activeSectors: activeSectors ?? this.activeSectors,
       offlineStartTime: offlineStartTime ?? this.offlineStartTime,
       prestigeCount: prestigeCount ?? this.prestigeCount,
+      warehouseLevel: warehouseLevel ?? this.warehouseLevel,
     );
   }
 
@@ -74,6 +91,7 @@ class GameState {
     'activeSectors': activeSectors.map((s) => s.name).toList(),
     'offlineStartTime': offlineStartTime?.toIso8601String(),
     'prestigeCount': prestigeCount,
+    'warehouseLevel': warehouseLevel,
   };
 
   factory GameState.fromJson(Map<String, dynamic> json) => GameState(
@@ -98,5 +116,6 @@ class GameState {
         ? DateTime.parse(json['offlineStartTime'] as String)
         : null,
     prestigeCount: json['prestigeCount'] as int,
+    warehouseLevel: json['warehouseLevel'] as int? ?? 0,
   );
 }

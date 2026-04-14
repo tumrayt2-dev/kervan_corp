@@ -42,7 +42,7 @@
 
   "comingSoon": "Yapım aşamasında...",
 
-  "sectorAgriculture": "Tarım",
+  "sectorAgriculture": "Hammadde",
   "sectorProduction": "Üretim",
   "sectorLogistics": "Lojistik",
   "sectorTrade": "Ticaret",
@@ -80,13 +80,45 @@
   },
 
   "sell": "Sat",
-  "sellAll": "Tümünü Sat",
+  "sellAll": "Tümünü Sat ({qty})",
+  "@sellAll": {
+    "placeholders": { "qty": { "type": "String" } }
+  },
   "estimatedRevenue": "Tahmini Gelir",
   "available": "Satılabilir",
   "reserved": "Rezerve",
   "insufficientStock": "Yetersiz stok",
   "insufficientFunds": "Yetersiz para",
   "storageFull": "Depo dolu — önce sat",
+
+  "filterAll": "Tümü",
+  "filterRawAgri": "🌾 Tarım",
+  "filterRawAnimal": "🐄 Hayvan",
+  "filterRawMining": "⛏️ Maden",
+  "filterRawForest": "🌲 Orman",
+  "filterProcessed": "⚙️ İşlenmiş",
+  "filterManufactured": "📦 Ürünler",
+
+  "inventoryTotalValue": "Toplam",
+  "inventoryCapacity": "Kapasite",
+  "reservedNote": "{qty} sözleşme rezervi",
+  "@reservedNote": {
+    "placeholders": { "qty": { "type": "String" } }
+  },
+  "channelLocked": "🔒 Bina gerekli",
+  "unitPrice": "Birim",
+  "perMinute": "/dk",
+  "hideZeroStock": "Sıfırları Gizle",
+  "showZeroStock": "Sıfırları Göster",
+  "sortByQuantity": "Miktar",
+  "sortByValue": "Değer",
+  "sortByName": "İsim",
+  "warehouseLv": "Depo Sv.{level}",
+  "@warehouseLv": {
+    "placeholders": { "level": { "type": "int" } }
+  },
+  "warehouseMaxLv": "Maks Seviye",
+  "upgradeWarehouseBtn": "Yükselt",
   "waitingForInput": "⚠️ {product} bekleniyor",
   "@waitingForInput": {
     "placeholders": { "product": { "type": "String" } }
@@ -234,7 +266,6 @@
     "placeholders": { "sector": { "type": "String" } }
   },
 
-  "perMinute": "/dk",
   "units": "birim",
   "capacity": "Kapasite",
   "totalValue": "Toplam Değer",

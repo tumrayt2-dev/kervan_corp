@@ -112,7 +112,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get comingSoon => 'Coming soon...';
 
   @override
-  String get sectorAgriculture => 'Agriculture';
+  String get sectorAgriculture => 'Raw Mat.';
 
   @override
   String get sectorProduction => 'Production';
@@ -203,7 +203,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sell => 'Sell';
 
   @override
-  String get sellAll => 'Sell All';
+  String sellAll(String qty) {
+    return 'Sell All ($qty)';
+  }
 
   @override
   String get estimatedRevenue => 'Estimated Revenue';
@@ -222,6 +224,73 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get storageFull => 'Storage full — sell first';
+
+  @override
+  String get filterAll => 'All';
+
+  @override
+  String get filterRawAgri => '🌾 Agri';
+
+  @override
+  String get filterRawAnimal => '🐄 Animal';
+
+  @override
+  String get filterRawMining => '⛏️ Mining';
+
+  @override
+  String get filterRawForest => '🌲 Forest';
+
+  @override
+  String get filterProcessed => '⚙️ Processed';
+
+  @override
+  String get filterManufactured => '📦 Products';
+
+  @override
+  String get inventoryTotalValue => 'Total';
+
+  @override
+  String get inventoryCapacity => 'Capacity';
+
+  @override
+  String reservedNote(String qty) {
+    return '$qty contract reserve';
+  }
+
+  @override
+  String get channelLocked => '🔒 Building required';
+
+  @override
+  String get unitPrice => 'Unit';
+
+  @override
+  String get perMinute => '/min';
+
+  @override
+  String get hideZeroStock => 'Hide Empty';
+
+  @override
+  String get showZeroStock => 'Show Empty';
+
+  @override
+  String get sortByQuantity => 'Qty';
+
+  @override
+  String get sortByValue => 'Value';
+
+  @override
+  String get sortByName => 'Name';
+
+  @override
+  String warehouseLv(int level) {
+    return 'Wh. Lv.$level';
+  }
+
+  @override
+  String get warehouseMaxLv => 'Max Level';
+
+  @override
+  String get upgradeWarehouseBtn => 'Upgrade';
 
   @override
   String waitingForInput(String product) {
@@ -604,9 +673,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String sectorUnlocked(String sector) {
     return '$sector Sector Unlocked!';
   }
-
-  @override
-  String get perMinute => '/min';
 
   @override
   String get units => 'units';

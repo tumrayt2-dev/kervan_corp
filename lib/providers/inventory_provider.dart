@@ -49,6 +49,12 @@ class InventoryNotifier extends StateNotifier<Inventory> {
     _service = InventoryService(state);
   }
 
+  void updateMaxCapacity(double newMax) {
+    state = Inventory(slots: state.slots, maxTotalWeight: newMax)
+      ..totalWeight = state.totalWeight;
+    _service = InventoryService(state);
+  }
+
   /// Dışarıdan (üretim motoru gibi) inventory mutasyonu yapıldıktan
   /// sonra Riverpod'u yeniden tetiklemek için çağrılır.
   void notifyChanged() => _refresh();

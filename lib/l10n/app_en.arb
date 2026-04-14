@@ -42,7 +42,7 @@
 
   "comingSoon": "Coming soon...",
 
-  "sectorAgriculture": "Agriculture",
+  "sectorAgriculture": "Raw Mat.",
   "sectorProduction": "Production",
   "sectorLogistics": "Logistics",
   "sectorTrade": "Trade",
@@ -80,7 +80,10 @@
   },
 
   "sell": "Sell",
-  "sellAll": "Sell All",
+  "sellAll": "Sell All ({qty})",
+  "@sellAll": {
+    "placeholders": { "qty": { "type": "String" } }
+  },
   "estimatedRevenue": "Estimated Revenue",
   "available": "Available",
   "reserved": "Reserved",
@@ -91,6 +94,35 @@
   "@waitingForInput": {
     "placeholders": { "product": { "type": "String" } }
   },
+
+  "filterAll": "All",
+  "filterRawAgri": "🌾 Agri",
+  "filterRawAnimal": "🐄 Animal",
+  "filterRawMining": "⛏️ Mining",
+  "filterRawForest": "🌲 Forest",
+  "filterProcessed": "⚙️ Processed",
+  "filterManufactured": "📦 Products",
+
+  "inventoryTotalValue": "Total",
+  "inventoryCapacity": "Capacity",
+  "reservedNote": "{qty} contract reserve",
+  "@reservedNote": {
+    "placeholders": { "qty": { "type": "String" } }
+  },
+  "channelLocked": "🔒 Building required",
+  "unitPrice": "Unit",
+  "perMinute": "/min",
+  "hideZeroStock": "Hide Empty",
+  "showZeroStock": "Show Empty",
+  "sortByQuantity": "Qty",
+  "sortByValue": "Value",
+  "sortByName": "Name",
+  "warehouseLv": "Wh. Lv.{level}",
+  "@warehouseLv": {
+    "placeholders": { "level": { "type": "int" } }
+  },
+  "warehouseMaxLv": "Max Level",
+  "upgradeWarehouseBtn": "Upgrade",
 
   "building_farm": "Farm",
   "building_mine": "Mine",
@@ -234,7 +266,6 @@
     "placeholders": { "sector": { "type": "String" } }
   },
 
-  "perMinute": "/min",
   "units": "units",
   "capacity": "Capacity",
   "totalValue": "Total Value",

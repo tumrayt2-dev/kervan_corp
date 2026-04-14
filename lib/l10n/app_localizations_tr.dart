@@ -111,7 +111,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get comingSoon => 'Yapım aşamasında...';
 
   @override
-  String get sectorAgriculture => 'Tarım';
+  String get sectorAgriculture => 'Hammadde';
 
   @override
   String get sectorProduction => 'Üretim';
@@ -202,7 +202,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get sell => 'Sat';
 
   @override
-  String get sellAll => 'Tümünü Sat';
+  String sellAll(String qty) {
+    return 'Tümünü Sat ($qty)';
+  }
 
   @override
   String get estimatedRevenue => 'Tahmini Gelir';
@@ -221,6 +223,73 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get storageFull => 'Depo dolu — önce sat';
+
+  @override
+  String get filterAll => 'Tümü';
+
+  @override
+  String get filterRawAgri => '🌾 Tarım';
+
+  @override
+  String get filterRawAnimal => '🐄 Hayvan';
+
+  @override
+  String get filterRawMining => '⛏️ Maden';
+
+  @override
+  String get filterRawForest => '🌲 Orman';
+
+  @override
+  String get filterProcessed => '⚙️ İşlenmiş';
+
+  @override
+  String get filterManufactured => '📦 Ürünler';
+
+  @override
+  String get inventoryTotalValue => 'Toplam';
+
+  @override
+  String get inventoryCapacity => 'Kapasite';
+
+  @override
+  String reservedNote(String qty) {
+    return '$qty sözleşme rezervi';
+  }
+
+  @override
+  String get channelLocked => '🔒 Bina gerekli';
+
+  @override
+  String get unitPrice => 'Birim';
+
+  @override
+  String get perMinute => '/dk';
+
+  @override
+  String get hideZeroStock => 'Sıfırları Gizle';
+
+  @override
+  String get showZeroStock => 'Sıfırları Göster';
+
+  @override
+  String get sortByQuantity => 'Miktar';
+
+  @override
+  String get sortByValue => 'Değer';
+
+  @override
+  String get sortByName => 'İsim';
+
+  @override
+  String warehouseLv(int level) {
+    return 'Depo Sv.$level';
+  }
+
+  @override
+  String get warehouseMaxLv => 'Maks Seviye';
+
+  @override
+  String get upgradeWarehouseBtn => 'Yükselt';
 
   @override
   String waitingForInput(String product) {
@@ -604,9 +673,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String sectorUnlocked(String sector) {
     return '$sector Sektörü Açıldı!';
   }
-
-  @override
-  String get perMinute => '/dk';
 
   @override
   String get units => 'birim';

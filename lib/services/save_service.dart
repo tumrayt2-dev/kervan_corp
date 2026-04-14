@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/game_state.dart';
 import '../models/inventory_model.dart';
-import '../models/building_model.dart';
 import '../models/enums.dart';
 import '../data/json_loader.dart';
 
@@ -19,36 +18,11 @@ class SaveService {
   static bool get hasSave => _playerBox.containsKey(_playerKey);
 
   static GameState createNewGame() {
-    final config = JsonLoader.inventoryConfig;
-    final startingMoney = 10000.0;
-
-    // Başlangıç binaları: 3 Tarla + 1 Maden
-    final buildings = <String, BuildingModel>{};
-    for (var i = 1; i <= 3; i++) {
-      buildings['farm_$i'] = BuildingModel(
-        id: 'farm_$i',
-        type: BuildingType.farm,
-        level: 1,
-        managerLevel: ManagerLevel.none,
-        isUnlocked: true,
-        localMaxStock: config != null
-            ? JsonLoader.getBuildingData('farm')?.baseLocalStock ?? 200
-            : 200,
-      );
-    }
-    buildings['mine_1'] = BuildingModel(
-      id: 'mine_1',
-      type: BuildingType.mine,
-      level: 1,
-      managerLevel: ManagerLevel.none,
-      isUnlocked: true,
-      localMaxStock: JsonLoader.getBuildingData('mine')?.baseLocalStock ?? 150,
-    );
-
     return GameState(
-      money: startingMoney,
-      buildings: buildings,
+      money: 10000.0,
+      buildings: {},
       activeSectors: [SectorType.agriculture],
+      warehouseLevel: 0,
     );
   }
 

@@ -4,12 +4,26 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../l10n/app_localizations.dart';
 import '../app.dart';
 import '../core/constants.dart';
+import '../providers/game_provider.dart';
 
-class SettingsScreen extends ConsumerWidget {
+class SettingsScreen extends ConsumerStatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends ConsumerState<SettingsScreen> {
+  late bool _devMode;
+
+  @override
+  void initState() {
+    super.initState();
+    _devMode = ref.read(gameProvider.notifier).devMode;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final currentLocale = ref.watch(localeProvider);
     final isTr = currentLocale.languageCode == 'tr';
@@ -65,6 +79,54 @@ class SettingsScreen extends ConsumerWidget {
                   _ToggleRow(label: l.sound, value: true, onChanged: (_) {}),
                   const Divider(),
                   _ToggleRow(label: l.music, value: true, onChanged: (_) {}),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          // Geliştirici
+          const _SectionHeader(title: '🛠 Geliştirici'),
+          Card(
+            color: AppColors.surface,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Sonsuz Para',
+                            style: TextStyle(
+                              color: AppColors.textPrimary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            _devMode ? '✅ Aktif — para düşmez' : 'Kapalı',
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: _devMode
+                                  ? AppColors.success
+                                  : AppColors.textSecondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Switch(
+                        value: _devMode,
+                        activeColor: AppColors.success,
+                        onChanged: (v) {
+                          setState(() => _devMode = v);
+                          ref.read(gameProvider.notifier).setDevMode(v);
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

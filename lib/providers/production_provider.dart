@@ -26,7 +26,7 @@ double getBuildingProgress(WidgetRef ref, String buildingId) {
   return ref.read(productionServiceProvider).getProgress(buildingId);
 }
 
-// Manuel tetikleme
+// Manuel tetikleme — artık sadece timer'ı başlatır, üretim tick'te tamamlanır
 BuildingStatus manualTrigger(WidgetRef ref, String buildingId) {
   final building = ref.read(gameProvider).buildings[buildingId];
   if (building == null) return BuildingStatus.idle;
@@ -36,11 +36,11 @@ BuildingStatus manualTrigger(WidgetRef ref, String buildingId) {
   final invService = InventoryService(inventory);
 
   final result = service.manualTrigger(building, invService);
+  // Durumu güncelle (producing / waitingInput / storageFull)
   ref.read(gameProvider.notifier).updateBuilding(
         buildingId,
         building.copyWith(status: result),
       );
-  ref.read(inventoryProvider.notifier).notifyChanged();
   return result;
 }
 
