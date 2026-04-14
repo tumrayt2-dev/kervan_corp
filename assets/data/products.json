@@ -1,0 +1,292 @@
+[
+  {
+    "id": "wheat", "type": "wheat", "category": "rawAgri",
+    "nameKey": "product_wheat", "baseValue": 2, "weight": 0.5,
+    "maxStackInInventory": 2000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.1}
+    ]
+  },
+  {
+    "id": "sugarCane", "type": "sugarCane", "category": "rawAgri",
+    "nameKey": "product_sugarCane", "baseValue": 3, "weight": 0.5,
+    "maxStackInInventory": 2000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "cotton", "type": "cotton", "category": "rawAgri",
+    "nameKey": "product_cotton", "baseValue": 4, "weight": 0.5,
+    "maxStackInInventory": 2000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "corn", "type": "corn", "category": "rawAgri",
+    "nameKey": "product_corn", "baseValue": 2, "weight": 0.5,
+    "maxStackInInventory": 2000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.1}
+    ]
+  },
+  {
+    "id": "milk", "type": "milk", "category": "rawAnimal",
+    "nameKey": "product_milk", "baseValue": 5, "weight": 1.0,
+    "maxStackInInventory": 1000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.2}
+    ]
+  },
+  {
+    "id": "wool", "type": "wool", "category": "rawAnimal",
+    "nameKey": "product_wool", "baseValue": 6, "weight": 1.0,
+    "maxStackInInventory": 1000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "meat", "type": "meat", "category": "rawAnimal",
+    "nameKey": "product_meat", "baseValue": 8, "weight": 1.0,
+    "maxStackInInventory": 1000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.3},
+      {"channel": "restaurant", "multiplier": 1.8}
+    ]
+  },
+  {
+    "id": "egg", "type": "egg", "category": "rawAnimal",
+    "nameKey": "product_egg", "baseValue": 4, "weight": 1.0,
+    "maxStackInInventory": 1000,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.2}
+    ]
+  },
+  {
+    "id": "ironOre", "type": "ironOre", "category": "rawMining",
+    "nameKey": "product_ironOre", "baseValue": 5, "weight": 2.0,
+    "maxStackInInventory": 1000,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "copperOre", "type": "copperOre", "category": "rawMining",
+    "nameKey": "product_copperOre", "baseValue": 7, "weight": 2.0,
+    "maxStackInInventory": 1000,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "sand", "type": "sand", "category": "rawMining",
+    "nameKey": "product_sand", "baseValue": 2, "weight": 2.0,
+    "maxStackInInventory": 1200,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "coal", "type": "coal", "category": "rawMining",
+    "nameKey": "product_coal", "baseValue": 4, "weight": 2.0,
+    "maxStackInInventory": 1000,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "stone", "type": "stone", "category": "rawMining",
+    "nameKey": "product_stone", "baseValue": 2, "weight": 2.0,
+    "maxStackInInventory": 1200,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "timber", "type": "timber", "category": "rawForest",
+    "nameKey": "product_timber", "baseValue": 6, "weight": 1.5,
+    "maxStackInInventory": 800,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "industrialStore", "multiplier": 1.2}
+    ]
+  },
+  {
+    "id": "flour", "type": "flour", "category": "processed",
+    "nameKey": "product_flour", "baseValue": 8, "weight": 1.5,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.2}
+    ]
+  },
+  {
+    "id": "cornFlour", "type": "cornFlour", "category": "processed",
+    "nameKey": "product_cornFlour", "baseValue": 7, "weight": 1.5,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "sugar", "type": "sugar", "category": "processed",
+    "nameKey": "product_sugar", "baseValue": 10, "weight": 1.5,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.2}
+    ]
+  },
+  {
+    "id": "cheese", "type": "cheese", "category": "processed",
+    "nameKey": "product_cheese", "baseValue": 20, "weight": 1.5,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.3},
+      {"channel": "port", "multiplier": 2.5}
+    ]
+  },
+  {
+    "id": "yogurt", "type": "yogurt", "category": "processed",
+    "nameKey": "product_yogurt", "baseValue": 15, "weight": 1.5,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.3}
+    ]
+  },
+  {
+    "id": "fabric", "type": "fabric", "category": "processed",
+    "nameKey": "product_fabric", "baseValue": 18, "weight": 1.5,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "rawIron", "type": "rawIron", "category": "processed",
+    "nameKey": "product_rawIron", "baseValue": 12, "weight": 3.0,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "copper", "type": "copper", "category": "processed",
+    "nameKey": "product_copper", "baseValue": 15, "weight": 3.0,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0},
+      {"channel": "port", "multiplier": 2.0}
+    ]
+  },
+  {
+    "id": "steel", "type": "steel", "category": "processed",
+    "nameKey": "product_steel", "baseValue": 25, "weight": 3.0,
+    "maxStackInInventory": 400,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0},
+      {"channel": "port", "multiplier": 2.5}
+    ]
+  },
+  {
+    "id": "glass", "type": "glass", "category": "processed",
+    "nameKey": "product_glass", "baseValue": 12, "weight": 2.0,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0}
+    ]
+  },
+  {
+    "id": "processedWood", "type": "processedWood", "category": "processed",
+    "nameKey": "product_processedWood", "baseValue": 14, "weight": 2.0,
+    "maxStackInInventory": 500,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "industrialStore", "multiplier": 1.2}
+    ]
+  },
+  {
+    "id": "bread", "type": "bread", "category": "manufactured",
+    "nameKey": "product_bread", "baseValue": 15, "weight": 1.0,
+    "maxStackInInventory": 800,
+    "availableSaleChannels": [
+      {"channel": "market", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 1.3},
+      {"channel": "port", "multiplier": 2.5}
+    ]
+  },
+  {
+    "id": "cake", "type": "cake", "category": "manufactured",
+    "nameKey": "product_cake", "baseValue": 35, "weight": 1.0,
+    "maxStackInInventory": 400,
+    "availableSaleChannels": [
+      {"channel": "supermarket", "multiplier": 1.0},
+      {"channel": "port", "multiplier": 2.5}
+    ]
+  },
+  {
+    "id": "machine", "type": "machine", "category": "manufactured",
+    "nameKey": "product_machine", "baseValue": 200, "weight": 5.0,
+    "maxStackInInventory": 200,
+    "availableSaleChannels": [
+      {"channel": "industrialStore", "multiplier": 1.0},
+      {"channel": "port", "multiplier": 3.0}
+    ]
+  },
+  {
+    "id": "electronic", "type": "electronic", "category": "manufactured",
+    "nameKey": "product_electronic", "baseValue": 150, "weight": 2.0,
+    "maxStackInInventory": 200,
+    "availableSaleChannels": [
+      {"channel": "electronicStore", "multiplier": 1.0},
+      {"channel": "port", "multiplier": 2.5},
+      {"channel": "airCargoTerminal", "multiplier": 4.0}
+    ]
+  },
+  {
+    "id": "furniture", "type": "furniture", "category": "manufactured",
+    "nameKey": "product_furniture", "baseValue": 120, "weight": 5.0,
+    "maxStackInInventory": 200,
+    "availableSaleChannels": [
+      {"channel": "furnitureStore", "multiplier": 1.0},
+      {"channel": "port", "multiplier": 2.5}
+    ]
+  },
+  {
+    "id": "clothing", "type": "clothing", "category": "manufactured",
+    "nameKey": "product_clothing", "baseValue": 60, "weight": 1.0,
+    "maxStackInInventory": 400,
+    "availableSaleChannels": [
+      {"channel": "clothingStore", "multiplier": 1.0},
+      {"channel": "port", "multiplier": 2.5},
+      {"channel": "airCargoTerminal", "multiplier": 4.0}
+    ]
+  },
+  {
+    "id": "burger", "type": "burger", "category": "manufactured",
+    "nameKey": "product_burger", "baseValue": 45, "weight": 1.0,
+    "maxStackInInventory": 400,
+    "availableSaleChannels": [
+      {"channel": "restaurant", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 0.8}
+    ]
+  },
+  {
+    "id": "pizza", "type": "pizza", "category": "manufactured",
+    "nameKey": "product_pizza", "baseValue": 50, "weight": 1.0,
+    "maxStackInInventory": 400,
+    "availableSaleChannels": [
+      {"channel": "restaurant", "multiplier": 1.0},
+      {"channel": "supermarket", "multiplier": 0.8}
+    ]
+  }
+]

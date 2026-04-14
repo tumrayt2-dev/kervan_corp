@@ -1,0 +1,38 @@
+[
+  {
+    "id": "agriculture", "type": "agriculture",
+    "nameKey": "sector_agriculture",
+    "unlockCondition": null,
+    "isDefault": true
+  },
+  {
+    "id": "production", "type": "production",
+    "nameKey": "sector_production",
+    "unlockCondition": {"totalEarned": 50000},
+    "isDefault": false
+  },
+  {
+    "id": "logistics", "type": "logistics",
+    "nameKey": "sector_logistics",
+    "unlockCondition": {"totalEarned": 500000},
+    "isDefault": false
+  },
+  {
+    "id": "trade", "type": "trade",
+    "nameKey": "sector_trade",
+    "unlockCondition": {"totalEarned": 5000000},
+    "isDefault": false
+  },
+  {
+    "id": "finance", "type": "finance",
+    "nameKey": "sector_finance",
+    "unlockCondition": {"totalEarned": 50000000},
+    "isDefault": false
+  },
+  {
+    "id": "technology", "type": "technology",
+    "nameKey": "sector_technology",
+    "unlockCondition": {"totalEarned": 500000000},
+    "isDefault": false
+  }
+]

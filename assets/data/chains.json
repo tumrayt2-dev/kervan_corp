@@ -1,0 +1,140 @@
+[
+  {
+    "buildingType": "farm", "recipeId": "wheat_production",
+    "processingTimeSec": 5,
+    "inputs": [],
+    "outputs": [{"productType": "wheat", "quantity": 10}]
+  },
+  {
+    "buildingType": "farm", "recipeId": "cotton_production",
+    "processingTimeSec": 7,
+    "inputs": [],
+    "outputs": [{"productType": "cotton", "quantity": 8}]
+  },
+  {
+    "buildingType": "mine", "recipeId": "ironOre_production",
+    "processingTimeSec": 8,
+    "inputs": [],
+    "outputs": [{"productType": "ironOre", "quantity": 6}]
+  },
+  {
+    "buildingType": "mine", "recipeId": "copperOre_production",
+    "processingTimeSec": 10,
+    "inputs": [],
+    "outputs": [{"productType": "copperOre", "quantity": 4}]
+  },
+  {
+    "buildingType": "forest", "recipeId": "timber_production",
+    "processingTimeSec": 10,
+    "inputs": [],
+    "outputs": [{"productType": "timber", "quantity": 8}]
+  },
+  {
+    "buildingType": "ranch", "recipeId": "milk_production",
+    "processingTimeSec": 12,
+    "inputs": [],
+    "outputs": [{"productType": "milk", "quantity": 6}]
+  },
+  {
+    "buildingType": "ranch", "recipeId": "wool_production",
+    "processingTimeSec": 15,
+    "inputs": [],
+    "outputs": [{"productType": "wool", "quantity": 5}]
+  },
+  {
+    "buildingType": "ranch", "recipeId": "meat_production",
+    "processingTimeSec": 18,
+    "inputs": [],
+    "outputs": [{"productType": "meat", "quantity": 4}]
+  },
+  {
+    "buildingType": "quarry", "recipeId": "stone_production",
+    "processingTimeSec": 6,
+    "inputs": [],
+    "outputs": [{"productType": "stone", "quantity": 12}]
+  },
+  {
+    "buildingType": "quarry", "recipeId": "sand_production",
+    "processingTimeSec": 5,
+    "inputs": [],
+    "outputs": [{"productType": "sand", "quantity": 15}]
+  },
+  {
+    "buildingType": "mill", "recipeId": "flour_recipe",
+    "processingTimeSec": 20,
+    "inputs": [{"productType": "wheat", "quantity": 3}],
+    "outputs": [{"productType": "flour", "quantity": 2}]
+  },
+  {
+    "buildingType": "ironFactory", "recipeId": "rawIron_recipe",
+    "processingTimeSec": 25,
+    "inputs": [{"productType": "ironOre", "quantity": 2}],
+    "outputs": [{"productType": "rawIron", "quantity": 1}]
+  },
+  {
+    "buildingType": "woodProcessing", "recipeId": "processedWood_recipe",
+    "processingTimeSec": 22,
+    "inputs": [{"productType": "timber", "quantity": 2}],
+    "outputs": [{"productType": "processedWood", "quantity": 1}]
+  },
+  {
+    "buildingType": "dairyFactory", "recipeId": "cheese_recipe",
+    "processingTimeSec": 30,
+    "inputs": [{"productType": "milk", "quantity": 4}],
+    "outputs": [{"productType": "cheese", "quantity": 1}, {"productType": "yogurt", "quantity": 1}]
+  },
+  {
+    "buildingType": "textileFactory", "recipeId": "fabric_recipe",
+    "processingTimeSec": 28,
+    "inputs": [{"productType": "wool", "quantity": 2}, {"productType": "cotton", "quantity": 1}],
+    "outputs": [{"productType": "fabric", "quantity": 2}]
+  },
+  {
+    "buildingType": "bakery", "recipeId": "bread_recipe",
+    "processingTimeSec": 15,
+    "inputs": [{"productType": "flour", "quantity": 2}],
+    "outputs": [{"productType": "bread", "quantity": 3}]
+  },
+  {
+    "buildingType": "bakery", "recipeId": "cake_recipe",
+    "processingTimeSec": 30,
+    "inputs": [{"productType": "flour", "quantity": 3}, {"productType": "sugar", "quantity": 1}],
+    "outputs": [{"productType": "cake", "quantity": 1}]
+  },
+  {
+    "buildingType": "steelFactory", "recipeId": "steel_recipe",
+    "processingTimeSec": 30,
+    "inputs": [{"productType": "rawIron", "quantity": 3}],
+    "outputs": [{"productType": "steel", "quantity": 2}]
+  },
+  {
+    "buildingType": "furnitureFactory", "recipeId": "furniture_recipe",
+    "processingTimeSec": 45,
+    "inputs": [{"productType": "processedWood", "quantity": 4}],
+    "outputs": [{"productType": "furniture", "quantity": 1}]
+  },
+  {
+    "buildingType": "clothingFactory", "recipeId": "clothing_recipe",
+    "processingTimeSec": 30,
+    "inputs": [{"productType": "fabric", "quantity": 3}],
+    "outputs": [{"productType": "clothing", "quantity": 2}]
+  },
+  {
+    "buildingType": "readyFoodFactory", "recipeId": "burger_recipe",
+    "processingTimeSec": 20,
+    "inputs": [{"productType": "meat", "quantity": 2}, {"productType": "bread", "quantity": 1}],
+    "outputs": [{"productType": "burger", "quantity": 3}]
+  },
+  {
+    "buildingType": "readyFoodFactory", "recipeId": "pizza_recipe",
+    "processingTimeSec": 25,
+    "inputs": [{"productType": "flour", "quantity": 2}, {"productType": "cheese", "quantity": 1}],
+    "outputs": [{"productType": "pizza", "quantity": 2}]
+  },
+  {
+    "buildingType": "machineFactory", "recipeId": "machine_recipe",
+    "processingTimeSec": 60,
+    "inputs": [{"productType": "steel", "quantity": 4}],
+    "outputs": [{"productType": "machine", "quantity": 1}]
+  }
+]

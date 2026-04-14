@@ -1,0 +1,47 @@
+[
+  {
+    "id": "smallTruck", "type": "smallTruck",
+    "nameKey": "vehicle_smallTruck",
+    "baseCost": 5000,
+    "capacity": 500,
+    "speedMultiplier": 1.5,
+    "travelTimeSec": 10,
+    "description": "vehicle_smallTruck_desc"
+  },
+  {
+    "id": "bigTruck", "type": "bigTruck",
+    "nameKey": "vehicle_bigTruck",
+    "baseCost": 20000,
+    "capacity": 2000,
+    "speedMultiplier": 1.0,
+    "travelTimeSec": 15,
+    "description": "vehicle_bigTruck_desc"
+  },
+  {
+    "id": "ship", "type": "ship",
+    "nameKey": "vehicle_ship",
+    "baseCost": 500000,
+    "capacity": 50000,
+    "speedMultiplier": 0.3,
+    "travelTimeSec": 60,
+    "description": "vehicle_ship_desc"
+  },
+  {
+    "id": "airCargo", "type": "airCargo",
+    "nameKey": "vehicle_airCargo",
+    "baseCost": 200000,
+    "capacity": 1000,
+    "speedMultiplier": 3.0,
+    "travelTimeSec": 20,
+    "description": "vehicle_airCargo_desc"
+  },
+  {
+    "id": "train", "type": "train",
+    "nameKey": "vehicle_train",
+    "baseCost": 150000,
+    "capacity": 20000,
+    "speedMultiplier": 1.0,
+    "travelTimeSec": 30,
+    "description": "vehicle_train_desc"
+  }
+]

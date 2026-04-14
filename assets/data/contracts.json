@@ -1,0 +1,66 @@
+[
+  {
+    "id": "cityOrder_wheat", "type": "cityOrder",
+    "nameKey": "contract_cityOrder",
+    "requiredProduct": "wheat", "requiredQtyMin": 500, "requiredQtyMax": 2000,
+    "rewardMoneyMultiplier": 3.0, "rewardDiamonds": 0,
+    "durationSeconds": 28800,
+    "minTotalEarned": 0
+  },
+  {
+    "id": "cityOrder_bread", "type": "cityOrder",
+    "nameKey": "contract_cityOrder",
+    "requiredProduct": "bread", "requiredQtyMin": 200, "requiredQtyMax": 800,
+    "rewardMoneyMultiplier": 3.5, "rewardDiamonds": 0,
+    "durationSeconds": 28800,
+    "minTotalEarned": 5000
+  },
+  {
+    "id": "b2b_flour", "type": "b2bOrder",
+    "nameKey": "contract_b2bOrder",
+    "requiredProduct": "flour", "requiredQtyMin": 300, "requiredQtyMax": 1000,
+    "rewardMoneyMultiplier": 4.0, "rewardDiamonds": 0,
+    "durationSeconds": 43200,
+    "minTotalEarned": 10000
+  },
+  {
+    "id": "b2b_steel", "type": "b2bOrder",
+    "nameKey": "contract_b2bOrder",
+    "requiredProduct": "steel", "requiredQtyMin": 50, "requiredQtyMax": 200,
+    "rewardMoneyMultiplier": 4.5, "rewardDiamonds": 0,
+    "durationSeconds": 43200,
+    "minTotalEarned": 100000
+  },
+  {
+    "id": "vip_furniture", "type": "vipOrder",
+    "nameKey": "contract_vipOrder",
+    "requiredProduct": "furniture", "requiredQtyMin": 20, "requiredQtyMax": 100,
+    "rewardMoneyMultiplier": 6.0, "rewardDiamonds": 3,
+    "durationSeconds": 14400,
+    "minTotalEarned": 200000
+  },
+  {
+    "id": "vip_machine", "type": "vipOrder",
+    "nameKey": "contract_vipOrder",
+    "requiredProduct": "machine", "requiredQtyMin": 5, "requiredQtyMax": 20,
+    "rewardMoneyMultiplier": 7.0, "rewardDiamonds": 5,
+    "durationSeconds": 14400,
+    "minTotalEarned": 500000
+  },
+  {
+    "id": "export_clothing", "type": "exportContract",
+    "nameKey": "contract_exportContract",
+    "requiredProduct": "clothing", "requiredQtyMin": 100, "requiredQtyMax": 500,
+    "rewardMoneyMultiplier": 5.0, "rewardDiamonds": 2,
+    "durationSeconds": 86400,
+    "minTotalEarned": 300000
+  },
+  {
+    "id": "urgent_bread", "type": "urgentOrder",
+    "nameKey": "contract_urgentOrder",
+    "requiredProduct": "bread", "requiredQtyMin": 500, "requiredQtyMax": 1500,
+    "rewardMoneyMultiplier": 5.0, "rewardDiamonds": 1,
+    "durationSeconds": 3600,
+    "minTotalEarned": 20000
+  }
+]

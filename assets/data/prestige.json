@@ -1,0 +1,38 @@
+[
+  {
+    "id": "head_start", "nameKey": "prestige_headStart",
+    "descKey": "prestige_headStart_desc",
+    "effect": {"type": "startingMoney", "value": 50000},
+    "cost": 1, "maxLevel": 5, "order": 1
+  },
+  {
+    "id": "production_mastery", "nameKey": "prestige_productionMastery",
+    "descKey": "prestige_productionMastery_desc",
+    "effect": {"type": "productionBonus", "value": 0.25},
+    "cost": 2, "maxLevel": 3, "order": 2
+  },
+  {
+    "id": "heritage_storage", "nameKey": "prestige_heritageStorage",
+    "descKey": "prestige_heritageStorage_desc",
+    "effect": {"type": "keepInventory", "value": 0.20, "slots": 3},
+    "cost": 3, "maxLevel": 1, "order": 3
+  },
+  {
+    "id": "veteran_manager", "nameKey": "prestige_veteranManager",
+    "descKey": "prestige_veteranManager_desc",
+    "effect": {"type": "keepManagers", "value": 1},
+    "cost": 5, "maxLevel": 1, "order": 4
+  },
+  {
+    "id": "research_carry", "nameKey": "prestige_researchCarry",
+    "descKey": "prestige_researchCarry_desc",
+    "effect": {"type": "keepResearch", "percent": 0.50},
+    "cost": 4, "maxLevel": 2, "order": 5
+  },
+  {
+    "id": "diamond_bonus", "nameKey": "prestige_diamondBonus",
+    "descKey": "prestige_diamondBonus_desc",
+    "effect": {"type": "diamondGain", "value": 0.20},
+    "cost": 3, "maxLevel": 3, "order": 6
+  }
+]

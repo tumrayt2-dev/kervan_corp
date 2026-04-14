@@ -1,0 +1,122 @@
+[
+  {
+    "id": "fertile_soil", "branch": "agriculture",
+    "nameKey": "research_fertileSoil",
+    "descKey": "research_fertileSoil_desc",
+    "effect": {"type": "productionBonus", "target": "farm", "value": 0.20},
+    "cost": {"money": 5000}, "prerequisites": [],
+    "order": 1
+  },
+  {
+    "id": "irrigation", "branch": "agriculture",
+    "nameKey": "research_irrigation",
+    "descKey": "research_irrigation_desc",
+    "effect": {"type": "productionBonus", "target": "farm", "value": 0.15},
+    "cost": {"money": 8000}, "prerequisites": ["fertile_soil"],
+    "order": 2
+  },
+  {
+    "id": "mining_drill", "branch": "agriculture",
+    "nameKey": "research_miningDrill",
+    "descKey": "research_miningDrill_desc",
+    "effect": {"type": "productionBonus", "target": "mine", "value": 0.25},
+    "cost": {"money": 12000}, "prerequisites": [],
+    "order": 3
+  },
+  {
+    "id": "assembly_line", "branch": "production",
+    "nameKey": "research_assemblyLine",
+    "descKey": "research_assemblyLine_desc",
+    "effect": {"type": "productionBonus", "target": "all", "value": 0.10},
+    "cost": {"money": 20000}, "prerequisites": [],
+    "order": 1
+  },
+  {
+    "id": "quality_control", "branch": "production",
+    "nameKey": "research_qualityControl",
+    "descKey": "research_qualityControl_desc",
+    "effect": {"type": "productionBonus", "target": "all", "value": 0.15},
+    "cost": {"money": 35000}, "prerequisites": ["assembly_line"],
+    "order": 2
+  },
+  {
+    "id": "logistics_software", "branch": "logistics",
+    "nameKey": "research_logisticsSoftware",
+    "descKey": "research_logisticsSoftware_desc",
+    "effect": {"type": "contractSlot", "value": 1},
+    "cost": {"money": 50000}, "prerequisites": [],
+    "order": 1
+  },
+  {
+    "id": "vehicle_upgrade", "branch": "logistics",
+    "nameKey": "research_vehicleUpgrade",
+    "descKey": "research_vehicleUpgrade_desc",
+    "effect": {"type": "vehicleCapacity", "value": 0.20},
+    "cost": {"money": 80000}, "prerequisites": ["logistics_software"],
+    "order": 2
+  },
+  {
+    "id": "export_network", "branch": "trade",
+    "nameKey": "research_exportNetwork",
+    "descKey": "research_exportNetwork_desc",
+    "effect": {"type": "exportBonus", "value": 0.20},
+    "cost": {"money": 100000}, "prerequisites": [],
+    "order": 1
+  },
+  {
+    "id": "fast_sale", "branch": "inventory",
+    "nameKey": "research_fastSale",
+    "descKey": "research_fastSale_desc",
+    "effect": {"type": "autoSaleInterval", "value": -10},
+    "cost": {"money": 50000}, "prerequisites": [],
+    "order": 1
+  },
+  {
+    "id": "warehouse_org", "branch": "inventory",
+    "nameKey": "research_warehouseOrg",
+    "descKey": "research_warehouseOrg_desc",
+    "effect": {"type": "inventoryCapacity", "value": 0.25},
+    "cost": {"money": 10000}, "prerequisites": [],
+    "order": 1
+  },
+  {
+    "id": "smart_shelf", "branch": "inventory",
+    "nameKey": "research_smartShelf",
+    "descKey": "research_smartShelf_desc",
+    "effect": {"type": "inventoryCapacity", "value": 0.30},
+    "cost": {"money": 25000}, "prerequisites": ["warehouse_org"],
+    "order": 2
+  },
+  {
+    "id": "market_connect", "branch": "inventory",
+    "nameKey": "research_marketConnect",
+    "descKey": "research_marketConnect_desc",
+    "effect": {"type": "autoSaleInterval", "value": -5},
+    "cost": {"money": 100000}, "prerequisites": ["fast_sale"],
+    "order": 3
+  },
+  {
+    "id": "smart_reserve", "branch": "inventory",
+    "nameKey": "research_smartReserve",
+    "descKey": "research_smartReserve_desc",
+    "effect": {"type": "smartReserve", "value": 1},
+    "cost": {"diamonds": 5}, "prerequisites": [],
+    "order": 4
+  },
+  {
+    "id": "passive_income", "branch": "finance",
+    "nameKey": "research_passiveIncome",
+    "descKey": "research_passiveIncome_desc",
+    "effect": {"type": "passiveIncome", "value": 0.005},
+    "cost": {"money": 200000}, "prerequisites": [],
+    "order": 1
+  },
+  {
+    "id": "automation", "branch": "technology",
+    "nameKey": "research_automation",
+    "descKey": "research_automation_desc",
+    "effect": {"type": "productionBonus", "target": "all", "value": 0.30},
+    "cost": {"money": 1000000}, "prerequisites": [],
+    "order": 1
+  }
+]

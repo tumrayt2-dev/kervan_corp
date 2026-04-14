@@ -1,0 +1,13 @@
+{
+  "startingMaxTotalWeight": 10000,
+  "weightUpgradePerDepoLevel": 0.3,
+  "autoSaleIntervalSeconds": 30,
+  "defaultSlotCapacities": {
+    "rawAgri": 2000,
+    "rawAnimal": 1000,
+    "rawMining": 1000,
+    "rawForest": 800,
+    "processed": 500,
+    "manufactured": 400
+  }
+}
