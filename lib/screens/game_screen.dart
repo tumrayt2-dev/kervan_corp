@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../l10n/app_localizations.dart';
@@ -7,6 +8,7 @@ import '../core/constants.dart';
 import '../core/extensions.dart';
 import '../providers/game_provider.dart';
 import '../providers/inventory_provider.dart';
+import '../providers/production_provider.dart';
 import '../services/save_service.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
@@ -16,13 +18,30 @@ class GameScreen extends ConsumerStatefulWidget {
   ConsumerState<GameScreen> createState() => _GameScreenState();
 }
 
-class _GameScreenState extends ConsumerState<GameScreen> {
+class _GameScreenState extends ConsumerState<GameScreen>
+    with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   Timer? _autoSaveTimer;
+  late Ticker _ticker;
+  Duration _lastElapsed = Duration.zero;
 
   @override
   void initState() {
     super.initState();
+
+    // Game loop — her frame çalışır
+    _ticker = createTicker((elapsed) {
+      final deltaTime = elapsed == Duration.zero
+          ? 0.0
+          : (elapsed - _lastElapsed).inMicroseconds / 1000000.0;
+      _lastElapsed = elapsed;
+      if (deltaTime > 0 && deltaTime < 1.0) {
+        productionTick(ref, deltaTime);
+      }
+    });
+    _ticker.start();
+
+    // Auto-save
     _autoSaveTimer = Timer.periodic(
       const Duration(seconds: AppConstants.autoSaveIntervalSeconds),
       (_) => _autoSave(),
@@ -31,6 +50,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
   @override
   void dispose() {
+    _ticker.dispose();
     _autoSaveTimer?.cancel();
     super.dispose();
   }
