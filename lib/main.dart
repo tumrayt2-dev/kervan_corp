@@ -9,6 +9,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('settings');
   await Hive.openBox('player');
+  await Hive.openBox('inventory');
   await JsonLoader.loadAll();
   runApp(
     const ProviderScope(

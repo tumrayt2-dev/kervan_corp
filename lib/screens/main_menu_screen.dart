@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import '../l10n/app_localizations.dart';
 import '../core/constants.dart';
+import '../services/save_service.dart';
+import '../providers/game_provider.dart';
+import '../providers/inventory_provider.dart';
 
 class MainMenuScreen extends ConsumerWidget {
   const MainMenuScreen({super.key});
 
-  bool _hasSave() {
-    final box = Hive.box('player');
-    return box.isNotEmpty;
+  Future<void> _continueGame(BuildContext context, WidgetRef ref) async {
+    final loaded = SaveService.loadGame();
+    if (loaded != null) {
+      ref.read(gameProvider.notifier).loadState(loaded.$1);
+      ref.read(inventoryProvider.notifier).loadInventory(loaded.$2);
+    }
+    if (context.mounted) context.go('/game');
   }
 
-  Future<void> _startNewGame(BuildContext context) async {
-    final box = Hive.box('player');
+  Future<void> _startNewGame(BuildContext context, WidgetRef ref) async {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) {
@@ -36,15 +41,27 @@ class MainMenuScreen extends ConsumerWidget {
       },
     );
     if (confirmed == true) {
-      await box.clear();
+      await SaveService.deleteSave();
+      final newState = SaveService.createNewGame();
+      final newInventory = SaveService.createNewInventory();
+      ref.read(gameProvider.notifier).loadState(newState);
+      ref.read(inventoryProvider.notifier).loadInventory(newInventory);
       if (context.mounted) context.go('/game');
     }
+  }
+
+  Future<void> _playNew(BuildContext context, WidgetRef ref) async {
+    final newState = SaveService.createNewGame();
+    final newInventory = SaveService.createNewInventory();
+    ref.read(gameProvider.notifier).loadState(newState);
+    ref.read(inventoryProvider.notifier).loadInventory(newInventory);
+    if (context.mounted) context.go('/game');
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
-    final hasSave = _hasSave();
+    final hasSave = SaveService.hasSave;
 
     return Scaffold(
       body: SafeArea(
@@ -55,7 +72,6 @@ class MainMenuScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Spacer(flex: 2),
-              // Logo / Başlık
               Text(
                 l.appTitle,
                 style: Theme.of(context).textTheme.displaySmall?.copyWith(
@@ -74,10 +90,9 @@ class MainMenuScreen extends ConsumerWidget {
                 textAlign: TextAlign.center,
               ),
               const Spacer(flex: 2),
-              // Butonlar
               if (hasSave) ...[
                 ElevatedButton(
-                  onPressed: () => context.go('/game'),
+                  onPressed: () => _continueGame(context, ref),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -85,17 +100,17 @@ class MainMenuScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton(
-                  onPressed: () => _startNewGame(context),
+                  onPressed: () => _startNewGame(context, ref),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     side: const BorderSide(color: AppColors.border),
                   ),
                   child: Text(l.newGame,
-                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 16)),
+                      style: const TextStyle(color: AppColors.textSecondary, fontSize: 16)),
                 ),
               ] else ...[
                 ElevatedButton(
-                  onPressed: () => context.go('/game'),
+                  onPressed: () => _playNew(context, ref),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
@@ -110,10 +125,9 @@ class MainMenuScreen extends ConsumerWidget {
                   side: const BorderSide(color: AppColors.border),
                 ),
                 child: Text(l.settings,
-                  style: const TextStyle(color: AppColors.textSecondary, fontSize: 16)),
+                    style: const TextStyle(color: AppColors.textSecondary, fontSize: 16)),
               ),
               const Spacer(),
-              // Versiyon
               Text(
                 '${l.version} 1.0.0',
                 style: Theme.of(context).textTheme.bodySmall,

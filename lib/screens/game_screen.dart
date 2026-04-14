@@ -1,8 +1,12 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../l10n/app_localizations.dart';
 import '../core/constants.dart';
 import '../core/extensions.dart';
+import '../providers/game_provider.dart';
+import '../providers/inventory_provider.dart';
+import '../services/save_service.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
@@ -13,6 +17,28 @@ class GameScreen extends ConsumerStatefulWidget {
 
 class _GameScreenState extends ConsumerState<GameScreen> {
   int _selectedIndex = 0;
+  Timer? _autoSaveTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _autoSaveTimer = Timer.periodic(
+      const Duration(seconds: AppConstants.autoSaveIntervalSeconds),
+      (_) => _autoSave(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _autoSaveTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _autoSave() async {
+    final state = ref.read(gameProvider);
+    final inventory = ref.read(inventoryProvider);
+    await SaveService.saveAll(state, inventory);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +64,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            _TopBar(),
+            const _TopBar(),
             Expanded(
               child: _PlaceholderTab(label: tabs[_selectedIndex]),
             ),
@@ -48,24 +74,21 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
         onDestinationSelected: (i) => setState(() => _selectedIndex = i),
-        destinations: List.generate(5, (i) => NavigationDestination(
-          icon: Icon(icons[i]),
-          label: tabs[i],
-        )),
+        destinations: List.generate(
+          5,
+          (i) => NavigationDestination(icon: Icon(icons[i]), label: tabs[i]),
+        ),
       ),
     );
   }
 }
 
-class _TopBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // Placeholder değerler — Milestone 2'de provider'dan gelecek
-    const double money = 10000;
-    const int diamonds = 0;
-    const int prestigePoints = 0;
-    const double perHour = 0;
+class _TopBar extends ConsumerWidget {
+  const _TopBar();
 
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(gameProvider);
     final l = AppLocalizations.of(context);
 
     return Container(
@@ -73,17 +96,14 @@ class _TopBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Row(
         children: [
-          _StatChip(
-            icon: '💰',
-            value: money.toGameFormat(),
-          ),
+          _StatChip(icon: '💰', value: state.money.toGameFormat()),
           const SizedBox(width: 8),
-          _StatChip(icon: '💎', value: '$diamonds'),
+          _StatChip(icon: '💎', value: '${state.diamonds}'),
           const SizedBox(width: 8),
-          _StatChip(icon: '🏆', value: '$prestigePoints'),
+          _StatChip(icon: '🏆', value: '${state.prestigePoints}'),
           const Spacer(),
           Text(
-            '${perHour.toGameFormat()}${l.perHour}',
+            '0${l.perHour}',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: AppColors.primary,
             ),
@@ -113,7 +133,8 @@ class _StatChip extends StatelessWidget {
         children: [
           Text(icon, style: const TextStyle(fontSize: 14)),
           const SizedBox(width: 4),
-          Text(value,
+          Text(
+            value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: AppColors.textPrimary,
@@ -136,13 +157,15 @@ class _PlaceholderTab extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(label,
+          Text(
+            label,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               color: AppColors.primary,
             ),
           ),
           const SizedBox(height: 8),
-          Text(l.comingSoon,
+          Text(
+            l.comingSoon,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: AppColors.textSecondary,
             ),
