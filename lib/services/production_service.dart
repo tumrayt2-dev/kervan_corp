@@ -39,8 +39,14 @@ class ProductionService {
     final time = calcProcessingTime(building);
     if (time <= 0) return 0;
     final batchesPerHour = 3600 / time;
-    return batchesPerHour *
-        recipe.outputs.fold(0.0, (s, o) => s + o.quantity);
+    return batchesPerHour * recipe.outputs.fold(0.0, (s, o) => s + o.quantity);
+  }
+
+  /// Seçili tarife göre ürün adını döndürür (tek output varsayılır)
+  ProductType? getOutputProduct(BuildingModel building) {
+    final recipe = getFirstRecipe(building);
+    if (recipe == null || recipe.outputs.isEmpty) return null;
+    return recipe.outputs.first.productType;
   }
 
   // --- Ana tick ---
@@ -198,6 +204,12 @@ class ProductionService {
   }
 
   ProductionRecipe? getFirstRecipe(BuildingModel building) {
-    return JsonLoader.getRecipesForBuilding(building.type.name).firstOrNull;
+    final recipes = JsonLoader.getRecipesForBuilding(building.type.name);
+    if (recipes.isEmpty) return null;
+    if (building.selectedRecipeId != null) {
+      final match = recipes.where((r) => r.recipeId == building.selectedRecipeId).firstOrNull;
+      if (match != null) return match;
+    }
+    return recipes.first;
   }
 }

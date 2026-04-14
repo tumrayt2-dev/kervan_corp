@@ -148,6 +148,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get statusNoEnergy => 'No Energy';
 
   @override
+  String get produce => 'Produce';
+
+  @override
+  String get selectRecipe => 'Select recipe';
+
+  @override
+  String get upgradeTimeLabel => 'Time';
+
+  @override
+  String get upgradeCostLabel => 'Cost';
+
+  @override
   String get upgrade => 'Upgrade';
 
   @override

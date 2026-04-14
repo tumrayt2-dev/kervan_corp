@@ -56,6 +56,10 @@
   "statusStorageFull": "Storage Full",
   "statusNoEnergy": "No Energy",
 
+  "produce": "Produce",
+  "selectRecipe": "Select recipe",
+  "upgradeTimeLabel": "Time",
+  "upgradeCostLabel": "Cost",
   "upgrade": "Upgrade",
   "upgradeTo": "Make Lv.{level}",
   "@upgradeTo": {

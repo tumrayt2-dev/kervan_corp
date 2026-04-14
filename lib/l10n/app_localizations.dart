@@ -374,6 +374,30 @@ abstract class AppLocalizations {
   /// **'Enerji Yok'**
   String get statusNoEnergy;
 
+  /// No description provided for @produce.
+  ///
+  /// In tr, this message translates to:
+  /// **'Üret'**
+  String get produce;
+
+  /// No description provided for @selectRecipe.
+  ///
+  /// In tr, this message translates to:
+  /// **'Tarif seç'**
+  String get selectRecipe;
+
+  /// No description provided for @upgradeTimeLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Süre'**
+  String get upgradeTimeLabel;
+
+  /// No description provided for @upgradeCostLabel.
+  ///
+  /// In tr, this message translates to:
+  /// **'Maliyet'**
+  String get upgradeCostLabel;
+
   /// No description provided for @upgrade.
   ///
   /// In tr, this message translates to:

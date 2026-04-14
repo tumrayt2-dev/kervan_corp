@@ -147,6 +147,18 @@ class AppLocalizationsTr extends AppLocalizations {
   String get statusNoEnergy => 'Enerji Yok';
 
   @override
+  String get produce => 'Üret';
+
+  @override
+  String get selectRecipe => 'Tarif seç';
+
+  @override
+  String get upgradeTimeLabel => 'Süre';
+
+  @override
+  String get upgradeCostLabel => 'Maliyet';
+
+  @override
   String get upgrade => 'Yükselt';
 
   @override

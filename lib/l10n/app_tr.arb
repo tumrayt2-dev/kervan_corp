@@ -56,6 +56,10 @@
   "statusStorageFull": "Depo Dolu",
   "statusNoEnergy": "Enerji Yok",
 
+  "produce": "Üret",
+  "selectRecipe": "Tarif seç",
+  "upgradeTimeLabel": "Süre",
+  "upgradeCostLabel": "Maliyet",
   "upgrade": "Yükselt",
   "upgradeTo": "Lv.{level} yap",
   "@upgradeTo": {

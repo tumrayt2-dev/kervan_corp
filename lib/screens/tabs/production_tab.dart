@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/constants.dart';
 import '../../core/extensions.dart';
+import '../../core/localization_helpers.dart';
 import '../../data/json_loader.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/building_model.dart';
@@ -42,7 +43,6 @@ class _ProductionTabState extends ConsumerState<ProductionTab> {
             itemCount: sectorBuildings.length,
             itemBuilder: (ctx, i) {
               final data = sectorBuildings[i];
-              // Bu bina tipinden mevcut binalar
               final existing = gameState.buildings.values
                   .where((b) => b.type.name == data.type)
                   .toList();
@@ -155,7 +155,7 @@ class _LockedBuildingCard extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
-                  buildingData.nameKey,
+                  buildingName(l, buildingData.type),
                   style: const TextStyle(color: AppColors.textSecondary),
                 ),
               ),
@@ -189,10 +189,13 @@ class _BuildingCardState extends ConsumerState<_BuildingCard>
   @override
   void initState() {
     super.initState();
+    // Her frame'de setState tetikleyerek progress bar'ı canlı günceller
     _progressCtrl = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 10),
-    );
+      duration: const Duration(seconds: 1),
+    )
+      ..addListener(() => setState(() {}))
+      ..repeat();
   }
 
   @override
@@ -226,6 +229,7 @@ class _BuildingCardState extends ConsumerState<_BuildingCard>
     final service = ref.read(productionServiceProvider);
     final progress = service.getProgress(b.id);
     final ratePerHour = service.getProductionRatePerHour(b);
+    final recipes = JsonLoader.getRecipesForBuilding(b.type.name);
 
     return Card(
       margin: const EdgeInsets.only(bottom: 10),
@@ -239,7 +243,7 @@ class _BuildingCardState extends ConsumerState<_BuildingCard>
               children: [
                 Expanded(
                   child: Text(
-                    _buildingName(b.type),
+                    buildingName(l, b.type.name),
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -288,11 +292,28 @@ class _BuildingCardState extends ConsumerState<_BuildingCard>
             ),
             const SizedBox(height: 8),
 
+            // Tarif seçici (birden fazla tarif varsa)
+            if (recipes.length > 1)
+              _RecipeSelector(
+                building: b,
+                recipes: recipes,
+                onRecipeSelected: (recipeId) {
+                  final updated = b.copyWith(
+                    selectedRecipeId: recipeId,
+                    status: BuildingStatus.idle,
+                  );
+                  ref.read(gameProvider.notifier).updateBuilding(b.id, updated);
+                  // Timer'ı sıfırla
+                  service.timers.remove(b.id);
+                },
+                l: l,
+              ),
+
             // Hız + yönetici satırı
             Row(
               children: [
                 Text(
-                  '${ratePerHour.toStringAsFixed(1)} ${l.perHour}',
+                  formatRate(ratePerHour, l),
                   style: const TextStyle(
                     color: AppColors.textSecondary, fontSize: 11),
                 ),
@@ -325,7 +346,7 @@ class _BuildingCardState extends ConsumerState<_BuildingCard>
                     child: OutlinedButton.icon(
                       onPressed: () => manualTrigger(ref, b.id),
                       icon: const Icon(Icons.play_arrow, size: 16),
-                      label: const Text('Üret', style: TextStyle(fontSize: 12)),
+                      label: Text(l.produce, style: const TextStyle(fontSize: 12)),
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 6),
                         side: const BorderSide(color: AppColors.primary),
@@ -387,13 +408,16 @@ class _BuildingCardState extends ConsumerState<_BuildingCard>
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text('${_buildingName(b.type)} — ${l.level}${b.level} → ${b.level + 1}'),
+        title: Text('${buildingName(l, b.type.name)} — ${l.level}${b.level} → ${b.level + 1}'),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _StatRow('Süre', '${currentTime.toStringAsFixed(1)}sn → ${nextTime.toStringAsFixed(1)}sn'),
-            _StatRow('Maliyet', cost.toGameFormat()),
+            _StatRow(
+              l.upgradeTimeLabel,
+              '${currentTime.toStringAsFixed(1)}s → ${nextTime.toStringAsFixed(1)}s',
+            ),
+            _StatRow(l.upgradeCostLabel, cost.toGameFormat()),
           ],
         ),
         actions: [
@@ -417,16 +441,96 @@ class _BuildingCardState extends ConsumerState<_BuildingCard>
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.surface,
+      isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder: (ctx) => _ManagerSheet(building: b),
+      builder: (ctx) => DraggableScrollableSheet(
+        initialChildSize: 0.55,
+        minChildSize: 0.4,
+        maxChildSize: 0.85,
+        expand: false,
+        builder: (_, scrollCtrl) => _ManagerSheet(
+          building: b,
+          scrollController: scrollCtrl,
+        ),
+      ),
     );
   }
+}
 
-  String _buildingName(BuildingType type) {
-    final data = JsonLoader.getBuildingData(type.name);
-    return data?.nameKey ?? type.name;
+// --- Tarif seçici ---
+
+class _RecipeSelector extends StatelessWidget {
+  final BuildingModel building;
+  final List<ProductionRecipe> recipes;
+  final ValueChanged<String> onRecipeSelected;
+  final AppLocalizations l;
+
+  const _RecipeSelector({
+    required this.building,
+    required this.recipes,
+    required this.onRecipeSelected,
+    required this.l,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final activeId = building.selectedRecipeId ?? recipes.first.recipeId;
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: recipes.map((r) {
+            final isActive = r.recipeId == activeId;
+            final outputType = r.outputs.isNotEmpty
+                ? r.outputs.first.productType
+                : null;
+            final label = outputType != null
+                ? productName(l, outputType)
+                : r.recipeId;
+
+            return Padding(
+              padding: const EdgeInsets.only(right: 6),
+              child: GestureDetector(
+                onTap: isActive ? null : () => onRecipeSelected(r.recipeId),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: isActive
+                        ? AppColors.primary.withValues(alpha: 0.15)
+                        : AppColors.bg,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: isActive
+                          ? AppColors.primary
+                          : AppColors.border,
+                      width: isActive ? 1.5 : 1,
+                    ),
+                  ),
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: isActive
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: isActive
+                          ? AppColors.primary
+                          : AppColors.textSecondary,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }).toList(),
+        ),
+      ),
+    );
   }
 }
 
@@ -494,7 +598,11 @@ class _ManagerBadge extends StatelessWidget {
 
 class _ManagerSheet extends ConsumerWidget {
   final BuildingModel building;
-  const _ManagerSheet({required this.building});
+  final ScrollController scrollController;
+  const _ManagerSheet({
+    required this.building,
+    required this.scrollController,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -513,85 +621,101 @@ class _ManagerSheet extends ConsumerWidget {
     ];
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(l.assignManager,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Tutaç
+          Container(
+            width: 40, height: 4,
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+              color: AppColors.border,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(l.assignManager,
                 style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 12),
-            ...options.map((opt) {
-              final (lvl, cost, diamond, mult) = opt;
-              final isCurrent = building.managerLevel == lvl;
-              final canAfford = diamond > 0
-                  ? diamonds >= diamond
-                  : money >= cost;
+          ),
+          const SizedBox(height: 8),
+          Flexible(
+            child: ListView(
+              controller: scrollController,
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: options.map((opt) {
+                final (lvl, cost, diamond, mult) = opt;
+                final isCurrent = building.managerLevel == lvl;
+                final canAfford = diamond > 0
+                    ? diamonds >= diamond
+                    : money >= cost;
 
-              return ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: Container(
-                  width: 36, height: 36,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: isCurrent
-                        ? AppColors.primary.withValues(alpha: 0.2)
-                        : AppColors.bg,
-                    border: Border.all(
-                      color: isCurrent ? AppColors.primary : AppColors.border,
+                return ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  leading: Container(
+                    width: 36, height: 36,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: isCurrent
+                          ? AppColors.primary.withValues(alpha: 0.2)
+                          : AppColors.bg,
+                      border: Border.all(
+                        color: isCurrent ? AppColors.primary : AppColors.border,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(mult, style: TextStyle(
+                        fontSize: 10,
+                        color: isCurrent ? AppColors.primary : AppColors.textSecondary,
+                        fontWeight: FontWeight.bold,
+                      )),
                     ),
                   ),
-                  child: Center(
-                    child: Text(mult, style: TextStyle(
-                      fontSize: 10,
-                      color: isCurrent ? AppColors.primary : AppColors.textSecondary,
-                      fontWeight: FontWeight.bold,
-                    )),
-                  ),
-                ),
-                title: Text(_levelName(l, lvl),
-                    style: TextStyle(
-                      color: isCurrent ? AppColors.primary : AppColors.textPrimary,
-                      fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
-                    )),
-                subtitle: cost > 0
-                    ? Text(cost.toGameFormat(),
-                        style: const TextStyle(fontSize: 11))
-                    : diamond > 0
-                        ? Text('$diamond 💎',
-                            style: const TextStyle(fontSize: 11))
-                        : null,
-                trailing: isCurrent
-                    ? const Icon(Icons.check_circle,
-                        color: AppColors.primary, size: 18)
-                    : null,
-                enabled: !isCurrent && (lvl == ManagerLevel.none || canAfford),
-                onTap: isCurrent
-                    ? null
-                    : () {
-                        Navigator.pop(context);
-                        if (lvl == ManagerLevel.none) {
-                          ref.read(gameProvider.notifier)
-                              .assignManager(building.id, lvl);
-                        } else if (diamond > 0) {
-                          if (ref.read(gameProvider.notifier)
-                              .spendDiamonds(diamond)) {
+                  title: Text(_levelName(l, lvl),
+                      style: TextStyle(
+                        color: isCurrent ? AppColors.primary : AppColors.textPrimary,
+                        fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
+                      )),
+                  subtitle: cost > 0
+                      ? Text(cost.toGameFormat(),
+                          style: const TextStyle(fontSize: 11))
+                      : diamond > 0
+                          ? Text('$diamond 💎',
+                              style: const TextStyle(fontSize: 11))
+                          : null,
+                  trailing: isCurrent
+                      ? const Icon(Icons.check_circle,
+                          color: AppColors.primary, size: 18)
+                      : null,
+                  enabled: !isCurrent && (lvl == ManagerLevel.none || canAfford),
+                  onTap: isCurrent
+                      ? null
+                      : () {
+                          Navigator.pop(context);
+                          if (lvl == ManagerLevel.none) {
                             ref.read(gameProvider.notifier)
                                 .assignManager(building.id, lvl);
+                          } else if (diamond > 0) {
+                            if (ref.read(gameProvider.notifier)
+                                .spendDiamonds(diamond)) {
+                              ref.read(gameProvider.notifier)
+                                  .assignManager(building.id, lvl);
+                            }
+                          } else {
+                            if (ref.read(gameProvider.notifier)
+                                .spendMoney(cost)) {
+                              ref.read(gameProvider.notifier)
+                                  .assignManager(building.id, lvl);
+                            }
                           }
-                        } else {
-                          if (ref.read(gameProvider.notifier)
-                              .spendMoney(cost)) {
-                            ref.read(gameProvider.notifier)
-                                .assignManager(building.id, lvl);
-                          }
-                        }
-                      },
-              );
-            }),
-          ],
-        ),
+                        },
+                );
+              }).toList(),
+            ),
+          ),
+          const SizedBox(height: 8),
+        ],
       ),
     );
   }

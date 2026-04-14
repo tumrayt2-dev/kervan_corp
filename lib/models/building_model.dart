@@ -12,6 +12,7 @@ class BuildingModel {
   BuildingStatus status;
   bool autoSaleEnabled;
   String? autoSaleChannelId;
+  String? selectedRecipeId;
 
   BuildingModel({
     required this.id,
@@ -24,6 +25,7 @@ class BuildingModel {
     this.status = BuildingStatus.idle,
     this.autoSaleEnabled = false,
     this.autoSaleChannelId,
+    this.selectedRecipeId,
   });
 
   double upgradeCost(double baseCost) => baseCost * pow(1.15, level - 1);
@@ -50,6 +52,8 @@ class BuildingModel {
     BuildingStatus? status,
     bool? autoSaleEnabled,
     String? autoSaleChannelId,
+    String? selectedRecipeId,
+    bool clearRecipe = false,
   }) {
     return BuildingModel(
       id: id,
@@ -62,6 +66,7 @@ class BuildingModel {
       status: status ?? this.status,
       autoSaleEnabled: autoSaleEnabled ?? this.autoSaleEnabled,
       autoSaleChannelId: autoSaleChannelId ?? this.autoSaleChannelId,
+      selectedRecipeId: clearRecipe ? null : (selectedRecipeId ?? this.selectedRecipeId),
     );
   }
 
@@ -76,6 +81,7 @@ class BuildingModel {
     'status': status.name,
     'autoSaleEnabled': autoSaleEnabled,
     'autoSaleChannelId': autoSaleChannelId,
+    'selectedRecipeId': selectedRecipeId,
   };
 
   factory BuildingModel.fromJson(Map<String, dynamic> json) => BuildingModel(
@@ -89,5 +95,6 @@ class BuildingModel {
     status: BuildingStatus.values.byName(json['status'] as String),
     autoSaleEnabled: json['autoSaleEnabled'] as bool,
     autoSaleChannelId: json['autoSaleChannelId'] as String?,
+    selectedRecipeId: json['selectedRecipeId'] as String?,
   );
 }
