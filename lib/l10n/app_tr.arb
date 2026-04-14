@@ -1,0 +1,68 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Kervan A.Ş.",
+  "@appTitle": { "description": "Uygulama adı (Türkçe)" },
+  "appTitleShort": "Kervan",
+  "companySuffix": "A.Ş.",
+
+  "play": "Oyna",
+  "settings": "Ayarlar",
+  "exit": "Çıkış",
+  "newGame": "Yeni Oyun",
+  "continueGame": "Devam Et",
+  "cancel": "İptal",
+  "confirm": "Onayla",
+  "close": "Kapat",
+  "ok": "Tamam",
+
+  "newGameConfirmTitle": "Yeni Oyun",
+  "newGameConfirmBody": "Mevcut kayıt silinecek. Emin misin?",
+
+  "tabProduction": "Üretim",
+  "tabInventory": "Envanter",
+  "tabTransport": "Nakliye",
+  "tabContracts": "Sözleşme",
+  "tabResearch": "Araştırma",
+
+  "language": "Dil",
+  "languageTr": "Türkçe",
+  "languageEn": "İngilizce",
+  "sound": "Ses",
+  "music": "Müzik",
+  "version": "Sürüm",
+
+  "money": "Para",
+  "diamonds": "Elmas",
+  "prestigePoints": "Prestij",
+  "perHour": "/saat",
+
+  "comingSoon": "Yapım aşamasında...",
+
+  "sectorAgriculture": "Tarım",
+  "sectorProduction": "Üretim",
+  "sectorLogistics": "Lojistik",
+  "sectorTrade": "Ticaret",
+  "sectorFinance": "Finans",
+  "sectorTechnology": "Teknoloji",
+
+  "statusProducing": "Üretiyor",
+  "statusIdle": "Bekliyor",
+  "statusWaitingInput": "Girdi Bekleniyor",
+  "statusStorageFull": "Depo Dolu",
+  "statusNoEnergy": "Enerji Yok",
+
+  "upgrade": "Yükselt",
+  "level": "Lv.",
+  "manager": "Yönetici",
+  "managerNone": "Yönetici Yok (Manuel)",
+  "managerIntern": "Stajyer",
+  "managerExpert": "Uzman",
+  "managerDirector": "Direktör",
+  "managerCEO": "CEO",
+
+  "sell": "Sat",
+  "sellAll": "Tümünü Sat",
+  "estimatedRevenue": "Tahmini Gelir",
+  "available": "Satılabilir",
+  "reserved": "Rezerve"
+}

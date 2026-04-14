@@ -1,0 +1,68 @@
+{
+  "@@locale": "en",
+  "appTitle": "Kervan Corp",
+  "@appTitle": { "description": "App name (English)" },
+  "appTitleShort": "Kervan",
+  "companySuffix": "Corp",
+
+  "play": "Play",
+  "settings": "Settings",
+  "exit": "Exit",
+  "newGame": "New Game",
+  "continueGame": "Continue",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "close": "Close",
+  "ok": "OK",
+
+  "newGameConfirmTitle": "New Game",
+  "newGameConfirmBody": "Current save will be deleted. Are you sure?",
+
+  "tabProduction": "Production",
+  "tabInventory": "Inventory",
+  "tabTransport": "Transport",
+  "tabContracts": "Contracts",
+  "tabResearch": "Research",
+
+  "language": "Language",
+  "languageTr": "Turkish",
+  "languageEn": "English",
+  "sound": "Sound",
+  "music": "Music",
+  "version": "Version",
+
+  "money": "Money",
+  "diamonds": "Diamonds",
+  "prestigePoints": "Prestige",
+  "perHour": "/hr",
+
+  "comingSoon": "Coming soon...",
+
+  "sectorAgriculture": "Agriculture",
+  "sectorProduction": "Production",
+  "sectorLogistics": "Logistics",
+  "sectorTrade": "Trade",
+  "sectorFinance": "Finance",
+  "sectorTechnology": "Technology",
+
+  "statusProducing": "Producing",
+  "statusIdle": "Idle",
+  "statusWaitingInput": "Waiting Input",
+  "statusStorageFull": "Storage Full",
+  "statusNoEnergy": "No Energy",
+
+  "upgrade": "Upgrade",
+  "level": "Lv.",
+  "manager": "Manager",
+  "managerNone": "No Manager (Manual)",
+  "managerIntern": "Intern",
+  "managerExpert": "Expert",
+  "managerDirector": "Director",
+  "managerCEO": "CEO",
+
+  "sell": "Sell",
+  "sellAll": "Sell All",
+  "estimatedRevenue": "Estimated Revenue",
+  "available": "Available",
+  "reserved": "Reserved"
+}
