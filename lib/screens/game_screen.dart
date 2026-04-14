@@ -10,6 +10,7 @@ import '../providers/game_provider.dart';
 import '../providers/inventory_provider.dart';
 import '../providers/production_provider.dart';
 import '../services/save_service.dart';
+import 'tabs/production_tab.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
@@ -87,7 +88,9 @@ class _GameScreenState extends ConsumerState<GameScreen>
           children: [
             const _TopBar(),
             Expanded(
-              child: _PlaceholderTab(label: tabs[_selectedIndex]),
+              child: _selectedIndex == 0
+                  ? const ProductionTab()
+                  : _PlaceholderTab(label: tabs[_selectedIndex]),
             ),
           ],
         ),
